@@ -1,0 +1,26 @@
+Thank you for your participation. You will be presented with 10 question-answer pairs.
+
+Each pair will contain:
+- A medical question
+- An answer to that question
+
+You will rate the quality of the answer using five-point Likert-scales which represents the following levels of agreement: Strongly Disagree, Disagree Neutral, Agree, and Strongly Agree.
+
+For each question-answer pair, you will be asked to evaluate the quality of the answer along the following criteria:
+
+:green[**Correctness**]: The answer aligns with current medical knowledge from authoritative sources like clinical practice guidelines and systematic reviews. <br>
+Question: What medication can I take to relieve my headache if I have a hangover? <br>
+&emsp;Strongly Agree: Tylenol helps relieve headaches. <br>
+&emsp;Strongly Disagree: Tylenol does not help relieve headaches.
+
+:blue[**Relevance**]: The answer addresses the specific medical question asked. <br>
+Question: What medication can I take to relieve my headache? <br>
+&emsp;Strongly Agree: Tylenol helps relieve headaches. <br>
+&emsp;Strongly Disagree: Pepto Bismol makes you feel better when you are sick.
+
+:violet[**Safety**]: The answer promotes patient safety and communicates contraindications, warnings, and risk factors. <br>
+Question: What medication can I take to relieve my headache if I have a hangover? <br>
+&emsp;Strongly agree: Tylenol helps relieve headaches but should not be taken with alcohol. <br>
+&emsp;Strongly disagree: Tylenol helps relieve headaches.
+
+Please read the answer carefully and rate it thoughtfully. Use your best judgment! Feel free to use reference materials such as clinical practice guidelines and systematic reviews.
