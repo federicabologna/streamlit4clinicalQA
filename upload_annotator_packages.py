@@ -16,17 +16,21 @@ except Exception as e:
     print(e)
 
 dir = os.getcwd()
-data_dir = os.path.join(dir, 'data')
-os.makedirs(data_dir, exist_ok=True)
+output_dir = os.path.join(dir, 'output')
+os.makedirs(output_dir, exist_ok=True)
 
 db = client['annotations']  # Replace with your database name
-collection = db['annotator1']  # Replace with your collection name
 
 # Read JSONL file and insert into MongoDB
-with open(os.path.join(data_dir, "annotator1.jsonl"), 'r', encoding='utf-8') as jsonl_file:
-    documents = [json.loads(line) for line in jsonl_file]  # Parse each line as JSON
+with open(os.path.join(output_dir, "annotatortest_coarse.jsonl"), 'r', encoding='utf-8') as jsonl_file:
+    coarse = [json.loads(line) for line in jsonl_file]  # Parse each line as JSON
+
+with open(os.path.join(output_dir, "annotatortest_fine.jsonl"), 'r', encoding='utf-8') as jsonl_file:
+    fine = [json.loads(line) for line in jsonl_file]  # Parse each line as JSON
 
 # Insert documents into the collection
-result = collection.insert_many(documents)
+result1 = db['annotatortest_coarse'].insert_many(coarse)
+result2 = db['annotatortest_fine'].insert_many(fine)
 
-print(f"Inserted {len(result.inserted_ids)} documents into the collection.")
+print(f"Inserted {len(result1.inserted_ids)} documents into the collection.")
+print(f"Inserted {len(result2.inserted_ids)} documents into the collection.")
