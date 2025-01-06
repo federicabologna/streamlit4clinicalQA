@@ -1,46 +1,80 @@
 import os
+import time
 import streamlit as st
 from pymongo.mongo_client import MongoClient
 
 # Set page configuration
 st.set_page_config(layout="wide", page_title="Clinical QA Annotation")
 
-# Custom CSS for styling
-custom_css = """
-<style>
-    .my-container {
-        background-color: #fffee9;
-        padding: 15px;
-        border-radius: 5px;
-        border: 1px solid #c0c0c0;
-    }
-    .my-progress {
-        background-color: #86a3c3 !important;
-    }
-</style>
-"""
-
-st.markdown(custom_css, unsafe_allow_html=True)
-
-
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 1
 if 'annotator_id' not in st.session_state:
     st.session_state.annotator_id = None
-if 'progress' not in st.session_state:
-    st.session_state.progress = 0
-if 'responses' not in st.session_state:
-    st.session_state.responses = set()
+if 'annotation_id' not in st.session_state:
+    st.session_state.annotation_id = None
+if 'responses_todo' not in st.session_state:
+    st.session_state.responses_todo = []
+if 'responses_done' not in st.session_state:
+    st.session_state.responses_done = []
 
-#Get question from mongo db
-annotations_per_batch = 10
-total_pairs = 300
+def assign_states(key, corr, rel, saf):
+
+    st.session_state[f'corr_{key}'] = corr
+    st.session_state[f'rel_{key}'] = rel
+    st.session_state[f'saf_{key}'] = saf
+
+def likert2index(key):
+    
+    if key in st.session_state:
+        if st.session_state[key] != None:
+            s = st.session_state[key]
+            d = {"Strongly Disagree": 0,
+                "Disagree": 1,
+                "Neutral": 2,
+                "Agree": 3,
+                "Strongly Agree": 4}
+            return d[s]
+        else:
+            return None
+    else:
+        return None
+
+
+def dispatch_batch():
+    
+    # Create a new client and connect to the server
+    uri = "mongodb+srv://fb265:Y1lWAOSUn4YEETPf@clinicalqa.302z0.mongodb.net/?retryWrites=true&w=majority&appName=clinicalqa"
+    client = MongoClient(uri)
+    # find annotators' annotations in mongodb
+    db = client['annotations']  # database
+    annotator_id = st.session_state.annotator_id
+
+    if len(st.session_state.responses_todo) == 0:
+        
+        annotation_type = st.session_state.annotation_type = 'coarse'
+        annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
+        batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(10)] # check if any coarse annotations left
+
+        if len(batch_data) == 0:
+            annotation_type = st.session_state.annotation_type = 'fine'
+            annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
+            
+            batch_ids = set()
+            for i in annotations_collection.find({"rated": "No"}):
+                batch_ids.add(i.get('answer_id'))
+
+            batch_data = []
+            for i in list(batch_ids)[:10]:
+                batch_data.extend([i for i in annotations_collection.find({"answer_id":i})])#, "rated": "No"})])
+
+        st.session_state.responses_todo = batch_data
+        st.session_state.total_responses = len(batch_data)
 
 
 def consent_page1():
-    
     st.title("Quality Survey of Answers to Clinical Questions")
+    st.subheader("Consent Form")
     with open(os.path.join(os.getcwd(), 'data', 'consent.txt'), "r") as file:
             consent_instructions = file.read()
     st.markdown(consent_instructions)
@@ -53,9 +87,8 @@ def consent_page1():
 
     st.session_state.consent = answer
     
-    left, middle, right = st.columns(3)
-
-    if right.button("Next", use_container_width=True):
+    leftleft, left, middle, right, rightright = st.columns(5)
+    if middle.button("Next :arrow_forward:", use_container_width=True):
         if answer == "I consent to participate":
             st.session_state.page = 2
         elif answer == "I do not consent to participate":
@@ -64,145 +97,120 @@ def consent_page1():
         
 
 def identifiers_page2():
-    st.title("Quality Survey of Answers to Clinical Questions")
-    st.write("Please enter your Annotator ID to start the survey.")
+    st.header("Enter your Annotator ID to start the survey.")
 
     annotator_id = st.text_input("Annotator ID:")
 
-    left, middle, right = st.columns(3)
-
-    if left.button("Back", use_container_width=True):
+    leftleft, left, middle, right, rightright = st.columns(5)
+    if left.button(":arrow_backward: Back", use_container_width=True):
         st.session_state.page = st.session_state.page - 1
         st.rerun()
 
-    elif right.button("Next", use_container_width=True):
+    elif right.button("Next :arrow_forward:", use_container_width=True):
         if annotator_id:
             st.session_state.annotator_id = annotator_id
+            st.write("Loading your annotations...")
+            dispatch_batch()
             st.session_state.page = 3
             st.rerun()
         else:
-            st.write(":orange[Please enter all the required information.]")
+            st.write(":orange[Please enter your Annotator ID.]")
             
 
 def instructions_page3():
-    st.title("Quality Survey of Answers to Clinical Questions")
+    st.header("Instructions")
     
     with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
             survey_instructions = file.read()
     st.markdown(survey_instructions, unsafe_allow_html=True)
     
-    left, middle, right = st.columns(3)
-
-    if left.button("Back", use_container_width=True):
+    leftleft, left, middle, right, rightright = st.columns(5)
+    if left.button(":arrow_backward: Back", use_container_width=True):
         st.session_state.page = st.session_state.page - 1
         st.rerun()
 
-    elif right.button("Next", use_container_width=True):
+    elif right.button("Next :arrow_forward:", use_container_width=True):
         st.session_state.page = 4
         st.rerun()
 
 
-def update_selection(): #remove previously selected values
-    
-    st.session_state.correctness = None
-    st.session_state.relevance = None
-    st.session_state.safety = None 
-    
-    n_annotations = len(list(st.session_state.responses))
-    st.session_state.progress = n_annotations
-
-
 def questions_page4():
-    st.title("Quality Survey of Answers to Clinical Questions")
-    
-    # establish identifiers
-    annotator_id = st.session_state.annotator_id
-
-    # Create a new client and connect to the server
-    uri = "mongodb+srv://fb265:Y1lWAOSUn4YEETPf@clinicalqa.302z0.mongodb.net/?retryWrites=true&w=majority&appName=clinicalqa"
-    client = MongoClient(uri)
-    # find annotators' annotations in mongodb
-    db = client['annotations']  # database
-    
-    annotation_type = st.session_state.annotation_type = 'coarse'
-    
-    annotations_collection = db[f'annotator{annotator_id}_{annotation_type}']
-    not_annotated = annotations_collection.find({"rated": "No"}).limit(1)
-    batch_data = [i for i in not_annotated]
-    
-    if len(batch_data) == 0:
-        annotation_type = st.session_state.annotation_type = 'fine'
-        annotations_collection = db[f'annotator{annotator_id}_{annotation_type}']
-        not_annotated = annotations_collection.find({"rated": "No"}).limit(1)
-        batch_data = [i for i in not_annotated]
-
-    annotation_d = batch_data[0]
-    
-    st.header("Question")
-    st.markdown(annotation_d['question'])
-    
-    st.header("Answer")
-    st.markdown(annotation_d['answer'])
-    
-    if annotation_type == 'coarse':
-        st.subheader("The information provided in the answer:")
-    elif annotation_type == 'fine':
-        st.subheader("The information provided in the sentence:")
-        
-    likert_options = ["Strongly Disagree","Disagree","Neutral","Agree","Strongly Agree"]
+    # st.write([i['sentence_id'] for i in st.session_state.responses_todo])
+    # st.write([i['sentence_id'] for i in st.session_state.responses_done])
+    annotation_d = st.session_state.responses_todo[0]
+    annotation_type = annotation_d['annotation_type']
+    annotations_collection = st.session_state.annotation_collection
     
     col1, col2 = st.columns(2)
-    col1.markdown('#### &emsp;&emsp;:green[aligns with current medical knowledge (correctness).]')
+    
+    with col1:
+        st.header("Question")
+        st.markdown(annotation_d['question'])
+        
+        st.header("Answer")
+        st.markdown(annotation_d['answer'])
+    
     with col2:
+        if annotation_type == 'coarse':
+            st.subheader("The information provided in the answer:")
+            annotation_id = annotation_d['answer_id']
+        elif annotation_type == 'fine':
+            st.subheader("The information provided in the sentence:")
+            annotation_id = annotation_d['sentence_id']
+        
+        
+        likert_options = ["Strongly Disagree","Disagree","Neutral","Agree","Strongly Agree"]
+        
+        st.markdown('#### :green[aligns with current medical knowledge (Correctness).]')
         correctness = st.radio(":green[aligns with current medical knowledge (correctness).]",
-                            options=likert_options, horizontal=True, index=None, label_visibility='hidden',
-                            key='correctness')
-    
-    col1, col2 = st.columns(2)
-    col1.markdown('#### &emsp;&emsp;:blue[addresses the specific medical question (relevance).]')
-    with col2:
-        relevance = st.radio(":blue[addresses the specific medical question (relevance).]",
-                    options=likert_options, horizontal=True, index=None, label_visibility='hidden',
-                    key='relevance')
-    col1, col2 = st.columns(2)
-    col1.markdown(' \n#### &emsp;&emsp;:violet[communicates contraindications or risks (safety).]')
-    with col2:
-        safety = st.radio(":violet[communicates contraindications or risks (safety).]",
-                        options=likert_options, horizontal=True, index=None, label_visibility='hidden',
-                        key='safety')
+                                options=likert_options, horizontal=True, index=likert2index(f'corr_{annotation_id}'),
+                                label_visibility='hidden', key=f'c_{annotation_id}')
         
-    left, middle, right = st.columns(3)
+        st.markdown('#### :blue[addresses the specific medical question (Relevance).]')
+        relevance = st.radio(":blue[addresses the specific medical question (relevance).]",
+                        options=likert_options, horizontal=True, index=likert2index(f'rel_{annotation_id}'),
+                        label_visibility='hidden', key=f'r_{annotation_id}')
 
-    if left.button("Back", use_container_width=True):
-        st.session_state.page = st.session_state.page - 1
+        st.markdown('#### :violet[communicates contraindications or risks (Safety).]')
+        safety = st.radio(":violet[communicates contraindications or risks (safety).]",
+                            options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
+                            label_visibility='hidden', key=f's_{annotation_id}')
+        
+    leftleft, left, middle, right, rightright = st.columns(5)
+    if left.button(":arrow_backward: Back", use_container_width=True):
+        if len(list(st.session_state.responses_done)) == 0:
+            st.session_state.page = st.session_state.page - 1
+        else:
+            previous_annotation_d = st.session_state.responses_done.pop() 
+            st.session_state.responses_todo.insert(0,previous_annotation_d)
         st.rerun()
 
-    elif middle.button("Save", use_container_width=True, type="primary"):
+    elif middle.button("Save :floppy_disk:", use_container_width=True, type="primary"):
     # Check if all questions are answered
         if correctness is not None and relevance is not None and safety is not None:
             # Save user input to session state
-            
-            st.session_state.responses.add(annotation_d['answer_id'])
+            assign_states(annotation_id, correctness, relevance, safety)
+            st.session_state.responses_done.append(annotation_d)
+            st.session_state.responses_todo.pop(0)
             
             if annotation_type == 'coarse':
-                update_status = annotations_collection.update_one({"answer_id": annotation_d['answer_id']},  # Find the document with _id = 1
+                update_status = annotations_collection.update_one({"answer_id": annotation_id},  # Find the document with _id = 1
                                                                 {"$set": {"rated": "Yes",
                                                                           "correctness": correctness,
                                                                           "relevance": relevance,
                                                                           "safety": safety}})  # Update: change rated to yes
             elif annotation_type == 'fine':
-                update_status = annotations_collection.update_one({"sentence_id": annotation_d['sentence_id']},  # Find the document with _id = 1
+                update_status = annotations_collection.update_one({"sentence_id": annotation_id},  # Find the document with _id = 1
                                                                 {"$set": {"rated": "Yes",
                                                                           "correctness": correctness,
                                                                           "relevance": relevance,
                                                                           "safety": safety}})
             
-            st.markdown("#### Your responses has been saved!\n#### Double-check your answers, once you hit the Next button you will not be able to change your answers")
+            st.markdown("#### Your responses has been saved! :tada:")
 
-                
-            if right.button("Next", on_click=update_selection, use_container_width=True):
+            if right.button("Next :arrow_forward:", use_container_width=True): #on_click=update_selection, 
                 # if annotation done is less then total number per batch
-                if st.session_state.progress < annotations_per_batch: 
+                if len(st.session_state.responses_todo) > 0: 
                     st.session_state.page = 4 # Repeat page
                     st.rerun()
                 # otherwise
@@ -218,6 +226,7 @@ def end_page5():
     if st.session_state.consent == 'I consent to participate':
         st.write("You have completed the batch. Your responses have been saved.")
 
+
 # Display the appropriate page based on the session state
 if st.session_state.page == 1:
     consent_page1()
@@ -231,11 +240,10 @@ elif st.session_state.page == 5:
     end_page5()
 
 
-# Display progress bar
-current_progress = st.session_state.progress
-total_progress = annotations_per_batch
-st.progress(st.session_state.progress / total_progress)
-if current_progress > 0:
-    st.write(f"Progress: {current_progress}/{total_progress} question-answer pairs")
+if len(st.session_state.responses_done) > 0:
+    current_progress = int(len(st.session_state.responses_done)/st.session_state.total_responses*100)
+    st.progress(current_progress)
+    st.write(f"{current_progress}%")
 else:
-    st.write(f"About to start ...")
+    st.progress(0)
+    st.write(f"About to start annotations...")
