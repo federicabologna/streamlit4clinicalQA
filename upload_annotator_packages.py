@@ -21,16 +21,22 @@ os.makedirs(output_dir, exist_ok=True)
 
 db = client['annotations']  # Replace with your database name
 
-# Read JSONL file and insert into MongoDB
-with open(os.path.join(output_dir, "annotatortest_coarse.jsonl"), 'r', encoding='utf-8') as jsonl_file:
-    coarse = [json.loads(line) for line in jsonl_file]  # Parse each line as JSON
+annotator_l = [i for i in range(1,7)]+['test']
 
-with open(os.path.join(output_dir, "annotatortest_fine.jsonl"), 'r', encoding='utf-8') as jsonl_file:
-    fine = [json.loads(line) for line in jsonl_file]  # Parse each line as JSON
+for n in annotator_l:
 
-# Insert documents into the collection
-result1 = db['annotatortest_coarse'].insert_many(coarse)
-result2 = db['annotatortest_fine'].insert_many(fine)
+    key = f'annotator{n}'
+    print(key)
+    # Read JSONL file and insert into MongoDB
+    with open(os.path.join(output_dir, f"{key}_coarse.jsonl"), 'r', encoding='utf-8') as jsonl_file:
+        coarse = [json.loads(line) for line in jsonl_file]  # Parse each line as JSON
 
-print(f"Inserted {len(result1.inserted_ids)} documents into the collection.")
-print(f"Inserted {len(result2.inserted_ids)} documents into the collection.")
+    with open(os.path.join(output_dir, f"{key}_fine.jsonl"), 'r', encoding='utf-8') as jsonl_file:
+        fine = [json.loads(line) for line in jsonl_file]  # Parse each line as JSON
+
+    # Insert documents into the collection
+    result_coarse = db[f'{key}_coarse'].insert_many(coarse)
+    result_fine = db[f'{key}_fine'].insert_many(fine)
+
+    print(f"Inserted {len(result_coarse.inserted_ids)} documents into the collection.")
+    print(f"Inserted {len(result_fine.inserted_ids)} documents into the collection.")
