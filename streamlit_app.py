@@ -1,7 +1,7 @@
 import os
-import time
 import streamlit as st
 from pymongo.mongo_client import MongoClient
+
 
 # Set page configuration
 st.set_page_config(layout="wide", page_title="Clinical QA Annotation")
@@ -41,7 +41,8 @@ def likert2index(key):
 
 
 def dispatch_batch():
-    uri = "mongodb+srv://fb265:Y1lWAOSUn4YEETPf@clinicalqa.302z0.mongodb.net/?retryWrites=true&w=majority&appName=clinicalqa"
+    mongodb_credentials = st.secrets.mongodb_credentials
+    uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['annotations']  # database
     annotator_id = st.session_state.annotator_id
