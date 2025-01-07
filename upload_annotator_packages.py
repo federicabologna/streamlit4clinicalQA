@@ -3,7 +3,7 @@ import json
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-uri = "mongodb+srv://fb265:Y1lWAOSUn4YEETPf@clinicalqa.302z0.mongodb.net/?retryWrites=true&w=majority&appName=clinicalqa"
+uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
 
 # Create a new client and connect to the server
 client = MongoClient(uri)
@@ -15,10 +15,7 @@ try:
 except Exception as e:
     print(e)
 
-dir = os.getcwd()
-output_dir = os.path.join(dir, 'output')
-os.makedirs(output_dir, exist_ok=True)
-
+output_dir = os.path.join(os.getcwd(), 'output')
 db = client['annotations']  # Replace with your database name
 
 annotator_l = [i for i in range(1,7)]+['test']
