@@ -19,7 +19,6 @@ if 'responses_done' not in st.session_state:
     st.session_state.responses_done = []
 
 def assign_states(key, corr, rel, saf):
-
     st.session_state[f'corr_{key}'] = corr
     st.session_state[f'rel_{key}'] = rel
     st.session_state[f'saf_{key}'] = saf
@@ -42,16 +41,12 @@ def likert2index(key):
 
 
 def dispatch_batch():
-    
-    # Create a new client and connect to the server
     uri = "mongodb+srv://fb265:Y1lWAOSUn4YEETPf@clinicalqa.302z0.mongodb.net/?retryWrites=true&w=majority&appName=clinicalqa"
-    client = MongoClient(uri)
-    # find annotators' annotations in mongodb
+    client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['annotations']  # database
     annotator_id = st.session_state.annotator_id
 
     if len(st.session_state.responses_todo) == 0:
-        
         annotation_type = st.session_state.annotation_type = 'coarse'
         annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
         batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(10)] # check if any coarse annotations left
@@ -135,8 +130,7 @@ def instructions_page3():
 
 
 def questions_page4():
-    # st.write([i['sentence_id'] for i in st.session_state.responses_todo])
-    # st.write([i['sentence_id'] for i in st.session_state.responses_done])
+    
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
@@ -186,10 +180,10 @@ def questions_page4():
         st.rerun()
 
     elif middle.button("Save :floppy_disk:", use_container_width=True, type="primary"):
-    # Check if all questions are answered
-        if correctness is not None and relevance is not None and safety is not None:
-            # Save user input to session state
-            assign_states(annotation_id, correctness, relevance, safety)
+    
+        if correctness is not None and relevance is not None and safety is not None: # Check if all questions are answered
+            
+            assign_states(annotation_id, correctness, relevance, safety) # Save user input to session state
             st.session_state.responses_done.append(annotation_d)
             st.session_state.responses_todo.pop(0)
             
@@ -205,7 +199,6 @@ def questions_page4():
                                                                           "correctness": correctness,
                                                                           "relevance": relevance,
                                                                           "safety": safety}})
-            
             st.markdown("#### Your responses has been saved! :tada:")
 
             if right.button("Next :arrow_forward:", use_container_width=True): #on_click=update_selection, 
