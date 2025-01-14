@@ -78,11 +78,8 @@ def identifiers_page1():
     annotator_id = st.text_input("Annotator ID:")
 
     leftleft, left, middle, right, rightright = st.columns(5)
-    if left.button(":arrow_backward: Back", use_container_width=True):
-        st.session_state.page = st.session_state.page - 1
-        st.rerun()
 
-    elif right.button("Next :arrow_forward:", use_container_width=True):
+    if right.button("Next :arrow_forward:", use_container_width=True):
         if annotator_id:
             st.session_state.annotator_id = annotator_id
             st.write("Loading your annotations...")
