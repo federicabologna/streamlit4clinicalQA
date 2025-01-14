@@ -28,11 +28,11 @@ def likert2index(key):
     if key in st.session_state:
         if st.session_state[key] != None:
             s = st.session_state[key]
-            d = {"Strongly Disagree": 0,
-                "Disagree": 1,
+            d = {"Disagree": 0,
+                "Partially Disagree": 1,
                 "Neutral": 2,
-                "Agree": 3,
-                "Strongly Agree": 4}
+                "Partially Agree": 3,
+                "Agree": 4}
             return d[s]
         else:
             return None
@@ -41,8 +41,9 @@ def likert2index(key):
 
 
 def dispatch_batch():
-    mongodb_credentials = st.secrets.mongodb_credentials
-    uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
+    # mongodb_credentials = st.secrets.mongodb_credentials
+    # uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
+    uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['annotations']  # database
     annotator_id = st.session_state.annotator_id
@@ -92,8 +93,11 @@ def consent_page1():
         st.rerun()
         
 
-def identifiers_page2():
+def identifiers_page1():
     st.header("Enter your Annotator ID to start the survey.")
+    st.markdown('''**By entering your Annotator ID you confirm that you have read
+                [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
+                and that you consent to participate in the study.**''')
 
     annotator_id = st.text_input("Annotator ID:")
 
@@ -107,13 +111,13 @@ def identifiers_page2():
             st.session_state.annotator_id = annotator_id
             st.write("Loading your annotations...")
             dispatch_batch()
-            st.session_state.page = 3
+            st.session_state.page = 2
             st.rerun()
         else:
             st.write(":orange[Please enter your Annotator ID.]")
             
 
-def instructions_page3():
+def instructions_page2():
     st.header("Instructions")
     
     with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
@@ -126,11 +130,11 @@ def instructions_page3():
         st.rerun()
 
     elif right.button("Next :arrow_forward:", use_container_width=True):
-        st.session_state.page = 4
+        st.session_state.page = 3
         st.rerun()
 
 
-def questions_page4():
+def questions_page3():
     
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
@@ -154,7 +158,7 @@ def questions_page4():
             annotation_id = annotation_d['sentence_id']
         
         
-        likert_options = ["Strongly Disagree","Disagree","Neutral","Agree","Strongly Agree"]
+        likert_options = ["Disagree","Partially Disagree","Neutral","Partially Agree","Agree"]
         
         st.markdown('#### :green[aligns with current medical knowledge (Correctness).]')
         correctness = st.radio(":green[aligns with current medical knowledge (correctness).]",
@@ -180,7 +184,7 @@ def questions_page4():
             st.session_state.responses_todo.insert(0,previous_annotation_d)
         st.rerun()
 
-    elif middle.button("Save :floppy_disk:", use_container_width=True, type="primary"):
+    elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
     
         if correctness is not None and relevance is not None and safety is not None: # Check if all questions are answered
             
@@ -201,37 +205,33 @@ def questions_page4():
                                                                           "relevance": relevance,
                                                                           "safety": safety}})
             st.markdown("#### Your responses has been saved! :tada:")
-
-            if right.button("Next :arrow_forward:", use_container_width=True): #on_click=update_selection, 
-                # if annotation done is less then total number per batch
-                if len(st.session_state.responses_todo) > 0: 
-                    st.session_state.page = 4 # Repeat page
-                    st.rerun()
-                # otherwise
-                else:
-                    st.session_state.page = 5  # End page
-                    st.rerun()
+ 
+            # if annotation done is less then total number per batch
+            if len(st.session_state.responses_todo) > 0: 
+                st.session_state.page = 3 # Repeat page
+                st.rerun()
+            # otherwise
+            else:
+                st.session_state.page = 4  # End page
+                st.rerun()
         else:
             st.markdown(":orange[**Please answer all the questions.**]")
 
         
-def end_page5():
+def end_page4():
     st.title("Thank You!")
-    if st.session_state.consent == 'I consent to participate':
-        st.write("You have completed the batch. Your responses have been saved.")
+    st.write("You have completed the batch. Your responses have been saved.")
 
 
 # Display the appropriate page based on the session state
 if st.session_state.page == 1:
-    consent_page1()
+    identifiers_page1()
 if st.session_state.page == 2:
-    identifiers_page2()
-if st.session_state.page == 3:
-    instructions_page3()
+    instructions_page2()
+elif st.session_state.page == 3:
+    questions_page3()
 elif st.session_state.page == 4:
-    questions_page4()
-elif st.session_state.page == 5:
-    end_page5()
+    end_page4()
 
 
 if len(st.session_state.responses_done) > 0:
