@@ -67,30 +67,6 @@ def dispatch_batch():
 
         st.session_state.responses_todo = batch_data
         st.session_state.total_responses = len(batch_data)
-
-
-def consent_page1():
-    st.title("Quality Survey of Answers to Clinical Questions")
-    st.subheader("Consent Form")
-    with open(os.path.join(os.getcwd(), 'data', 'consent.txt'), "r") as file:
-            consent_instructions = file.read()
-    st.markdown(consent_instructions)
-            
-    # Yes/No question
-    answer = st.radio(
-        "I have read the above information.",
-        options=["I consent to participate", "I do not consent to participate"]
-    )
-
-    st.session_state.consent = answer
-    
-    leftleft, left, middle, right, rightright = st.columns(5)
-    if middle.button("Next :arrow_forward:", use_container_width=True):
-        if answer == "I consent to participate":
-            st.session_state.page = 2
-        elif answer == "I do not consent to participate":
-            st.session_state.page = 5
-        st.rerun()
         
 
 def identifiers_page1():
