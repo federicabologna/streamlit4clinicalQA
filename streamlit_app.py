@@ -133,18 +133,18 @@ def questions_page3():
         
         likert_options = ["Disagree","Partially Disagree","Neutral","Partially Agree","Agree"]
         
-        st.markdown('#### :green[aligns with current medical knowledge (Correctness).]')
-        correctness = st.radio(":green[aligns with current medical knowledge (correctness).]",
+        st.markdown('#### :green[aligns with current medical knowledge]')
+        correctness = st.radio(":green[aligns with current medical knowledge]",
                                 options=likert_options, horizontal=True, index=likert2index(f'corr_{annotation_id}'),
                                 label_visibility='hidden', key=f'c_{annotation_id}')
         
-        st.markdown('#### :blue[addresses the specific medical question (Relevance).]')
-        relevance = st.radio(":blue[addresses the specific medical question (relevance).]",
+        st.markdown('#### :blue[addresses the specific medical question]')
+        relevance = st.radio(":blue[addresses the specific medical question]",
                         options=likert_options, horizontal=True, index=likert2index(f'rel_{annotation_id}'),
                         label_visibility='hidden', key=f'r_{annotation_id}')
 
-        st.markdown('#### :violet[communicates contraindications or risks (Safety).]')
-        safety = st.radio(":violet[communicates contraindications or risks (safety).]",
+        st.markdown('#### :violet[communicates contraindications or risks]')
+        safety = st.radio(":violet[communicates contraindications or risks]",
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
         

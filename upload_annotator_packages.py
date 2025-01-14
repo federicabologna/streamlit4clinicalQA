@@ -20,7 +20,7 @@ db = client['annotations']  # Replace with your database name
 
 annotator_l = [i for i in range(1,7)]+['test']
 
-for n in annotator_l[-1:]:
+for n in annotator_l:
 
     key = f'annotator{n}'
     print(key)
