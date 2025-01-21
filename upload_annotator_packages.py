@@ -18,7 +18,7 @@ except Exception as e:
 output_dir = os.path.join(os.getcwd(), 'output')
 db = client['annotations']  # Replace with your database name
 
-annotator_l = [i for i in range(1,7)]+['test']
+annotator_l = [i for i in range(1,7)]
 
 for n in annotator_l:
 

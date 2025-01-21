@@ -9,6 +9,8 @@ st.set_page_config(layout="wide", page_title="Clinical QA Annotation")
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 1
+if 'batch_size' not in st.session_state:
+    st.session_state.batch_size = 9
 if 'annotator_id' not in st.session_state:
     st.session_state.annotator_id = None
 if 'annotation_id' not in st.session_state:
@@ -47,11 +49,12 @@ def dispatch_batch():
     client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['annotations']  # database
     annotator_id = st.session_state.annotator_id
+    n_annotations = st.session_state.batch_size
 
     if len(st.session_state.responses_todo) == 0:
         annotation_type = st.session_state.annotation_type = 'coarse'
         annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
-        batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(10)] # check if any coarse annotations left
+        batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(n_annotations)] # check if any coarse annotations left
 
         if len(batch_data) == 0:
             annotation_type = st.session_state.annotation_type = 'fine'
@@ -62,7 +65,7 @@ def dispatch_batch():
                 batch_ids.add(i.get('answer_id'))
 
             batch_data = []
-            for i in list(batch_ids)[:10]:
+            for i in list(batch_ids)[:n_annotations]:
                 batch_data.extend([i for i in annotations_collection.find({"answer_id":i})])#, "rated": "No"})])
 
         st.session_state.responses_todo = batch_data
