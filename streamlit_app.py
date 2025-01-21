@@ -150,6 +150,9 @@ def questions_page3():
         safety = st.radio(":violet[communicates contraindications or risks]",
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
+    
+    st.markdown('''**Feel free to consult 
+                [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).**''')
         
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
@@ -180,7 +183,7 @@ def questions_page3():
                                                                           "correctness": correctness,
                                                                           "relevance": relevance,
                                                                           "safety": safety}})
-            st.markdown("#### Your responses has been saved! :tada:")
+            
  
             # if annotation done is less then total number per batch
             if len(st.session_state.responses_todo) > 0: 
