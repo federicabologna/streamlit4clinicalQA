@@ -19,9 +19,13 @@ Here are some examples:
 **Question:** If I take a probiotic should it be taken at a different time of the antibiotic?<br>
 
 :green[**The answer/sentence aligns with current medical knowledge.**] <br>
-*Agree*: correct information.<br>
-&emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea,
-taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> <br>
+
+| *Agree*:    |            |
+| :---        |       ---: |
+| &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> | Explanatio: correct information. |
+| Paragraph   | And more      |
+ correct information.<br>
+ <br>
 
 *Partially Agree:* does not mention the lack of consensus on the effectiveness of probiotics.<br>
 &emsp; It is generally recommended to take probiotics at least 2 hours after the antibiotic. <mark>Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.</mark> <br>
