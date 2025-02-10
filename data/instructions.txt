@@ -22,7 +22,7 @@ Please read the answer carefully and rate it thoughtfully. Use your best judgmen
 
 Here are some examples:
 
-| :green[The answer/sentence aligns with current medical knowledge.] <br> Question: If I take a probiotic should it be taken at a different time of the antibiotic?           |            |
+| ###:green[The answer/sentence aligns with current medical knowledge.] <br> Question: If I take a probiotic should it be taken at a different time of the antibiotic?           |            |
 | :---        | :---       |
 | *Agree*: <br> &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> | Explanation: correct information. |
 | *Partially Agree:* <br> &emsp; It is generally recommended to take probiotics at least 2 hours after the antibiotic. <mark>Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.</mark> | Explanation: does not mention the lack of consensus on the effectiveness of probiotics. |
@@ -30,7 +30,7 @@ Here are some examples:
 | *Partially Disagree:* <br> &emsp; It is generally recommended to take probiotics <mark>at least 30 minutes after the antibiotic.</mark> Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea. | Explanation: inaccuracy regarding the amount of time. |
 | *Disagree:* <br> &emsp; Probiotics can be taken at the same time as the antibiotic. <mark>Antibiotics do not reduce the effectiveness of probiotics</mark> at decreasing the risk of antibiotic-associated diarrhea. | Explanation: incorrect information. |
 
-| :blue[The answer/sentence addresses the specific medical question.] <br> **Question:** What medication can I take to relieve my headache if I have a hangover?          |            |
+| ###:blue[The answer/sentence addresses the specific medical question.] <br> **Question:** What medication can I take to relieve my headache if I have a hangover?          |            |
 | :---        | :---       |
 | *Agree*: <br> &emsp; <mark>Over-the-counter (OTC) nonsteroidal anti-inflammatory drugs (NSAIDs) such as ibuprofen or aspirin can be effective for relief. Acetaminophen (Tylenol) is also an option</mark>, but it should be used cautiously, as combining it with alcohol may lead to liver damage or failure. | Explanation: indicates specific medications. |
 | *Partially Agree:* <br> &emsp; <mark>Many over-the-counter (OTC) medications can help relieve the headache.</mark> However, Tylenol should be used cautiously, as it can hurt the liver. | Explanation: does not indicate specific medications but it does say that effective medications are available over-the-counter. |
@@ -38,7 +38,7 @@ Here are some examples:
 | *Partially Disagree:* <br> &emsp; <mark>Drinking plenty of fluids can help ease the headache. Water, electrolyte beverages (Gatorade or Pedialyte), and broth are good options</mark>. To be sure you’re getting enough hydration, drink fluids until your urine is clear. | Explanation: does not indicate medications that are effective at treating headaches. |
 | *Disagree:* <br> &emsp; <mark>Antacids such as Tums and Pepto Bismol can help with mild heartburn and indigestion caused by alcohol consumption.</mark> However, these medications should not be taken frequently. Eating bland foods can also reduce nausea. | Explanation: indicates medications that are effective at treating another ailment. |
 
-| :violet[The answer/sentence communicates contraindications or risks.] <br> **Question:** What medication can I take to relieve my headache if I have a hangover?          |            |
+| ###:violet[The answer/sentence communicates contraindications or risks.] <br> **Question:** What medication can I take to relieve my headache if I have a hangover?          |            |
 | :---        | :---       |
 | *Agree*: <br> &emsp; Nonsteroidal anti-inflammatory drugs (NSAIDs) such as ibuprofen or aspirin can be effective for relief. Acetaminophen (Tylenol) is also an option, <mark>but it should be used cautiously, as combining it with alcohol may lead to liver damage or failure.</mark> | Explanation: communicates contraindications and risks. |
 | *Partially Agree:* <br> &emsp; <mark>Although acetaminophen is effective at relieving headaches, combining it with alcohol may increase the risk of liver damage.</mark> Therefore, nonsteroidal anti-inflammatory drugs such as ibuprofen or aspirin may be a better option. | Explanation: communicates contraindications and risks but without the appropriate emphasis. |
