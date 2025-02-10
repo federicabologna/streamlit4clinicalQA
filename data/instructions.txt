@@ -35,8 +35,7 @@ Here are some examples:
 
 | :green[**The answer/sentence aligns with current medical knowledge.**]            |            |
 | :---        |       ---: |
-| *Agree*:            |
-| &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> | Explanation: correct information. |
+| *Agree*: <br> &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> | Explanation: correct information. |
 | *Partially Agree:*     |            |
 | &emsp; It is generally recommended to take probiotics at least 2 hours after the antibiotic. <mark>Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.</mark> | Explanation: does not mention the lack of consensus on the effectiveness of probiotics. |
 | *Neutral:*    |            |
