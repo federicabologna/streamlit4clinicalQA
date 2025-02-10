@@ -1,6 +1,6 @@
 import os
 import time
-from datetime import date
+from datetime import datetime
 import streamlit as st
 from pymongo.mongo_client import MongoClient
 
@@ -234,7 +234,7 @@ def questions_page3():
 def followup_page4():
 
     st.markdown('##### How easy to follow are the annotation instructions?')
-    safety = st.radio("How easy to follow are the annotation instructions?",
+    ease = st.radio("How easy to follow are the annotation instructions?",
                             options=st.session_state.ease_likert.keys(),
                             horizontal=True, index=likert2index(f'ease_{annotation_id}'),
                             label_visibility='hidden', key=f'e_{annotation_id}')
@@ -244,7 +244,8 @@ def followup_page4():
     # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['feedback']  # database
-    db[f'annotator{st.session_state.annotator_id}'].insertOne({'date': })
+    db[f'annotator{st.session_state.annotator_id}'].insertOne({'datetime': datetime.now(),
+                                                               'ease': ease})
         
 def end_page5():
     st.title("Thank You!")
