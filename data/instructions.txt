@@ -19,17 +19,21 @@ Here are some examples:
 **Question:** If I take a probiotic should it be taken at a different time of the antibiotic?<br>
 
 :green[**The answer/sentence aligns with current medical knowledge.**] <br>
-*Agree* example<br>
+*Agree*: <br>
 &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea,
 taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> <br>
 
-&emsp; *Partially Agree:* It is generally recommended to take probiotics at least 2 hours after the antibiotic. Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea. <br>
+*Partially Agree:* <br>
+&emsp; It is generally recommended to take probiotics at least 2 hours after the antibiotic. <mark>Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.</mark> <br>
 
-&emsp; *Neutral:* <br>
+*Neutral:* <br>
+&emsp; Clinical research shows that when probiotics are taken at least 2 hours after the antibiotic <mark>they are effective at decreasing the risk of antibiotic-associated diarrhea.</mark> <br>
 
-&emsp;*Partially Disagree:* <br>
+*Partially Disagree:* <br>
+&emsp; It is generally recommended to take probiotics <mark> at least 30 minutes after the antibiotic. </mark> Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.
 
-&emsp;*Disagree:* <br>
+*Disagree:* <br>
+&emsp; Probiotics can be taken at the same time as the antibiotic. <mark> Antibiotics do not reduce the effectiveness of probiotics </mark> at decreasing the risk of antibiotic-associated diarrhea.
 
 :blue[**Relevance**]: The answer addresses the specific medical question asked. <br>
 *Agree:* <br>
