@@ -1,6 +1,6 @@
 <style>
 table, th, td {
-   border: none;
+   border: none!important;
 }
 </style>
 
@@ -30,17 +30,21 @@ Here are some examples:
 | :---        |       ---: |
 | &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> | Explanation: correct information. |
 
-*Partially Agree:* does not mention the lack of consensus on the effectiveness of probiotics.<br>
-&emsp; It is generally recommended to take probiotics at least 2 hours after the antibiotic. <mark>Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.</mark> <br>
+| *Partially Agree:*     |            |
+| :---                   |       ---: |
+&emsp; It is generally recommended to take probiotics at least 2 hours after the antibiotic. <mark>Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.</mark> | Explanation: does not mention the lack of consensus on the effectiveness of probiotics. |
 
-*Neutral:* overstates the effectiveness of probiotics. <br>
-&emsp; Clinical research shows that when probiotics are taken at least 2 hours after the antibiotic <mark>they are effective at decreasing the risk of antibiotic-associated diarrhea.</mark> <br>
+| *Neutral:*    |            | 
+| :---          |       ---: |
+&emsp; Clinical research shows that when probiotics are taken at least 2 hours after the antibiotic <mark>they are effective at decreasing the risk of antibiotic-associated diarrhea.</mark> | Explanation: overstates the effectiveness of probiotics. |
 
-*Partially Disagree:* inaccuracy regarding the amount of time.<br>
-&emsp; It is generally recommended to take probiotics <mark> at least 30 minutes after the antibiotic. </mark> Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.
+| *Partially Disagree:*    |            |
+| :---                     |       ---: |
+&emsp; It is generally recommended to take probiotics <mark> at least 30 minutes after the antibiotic. </mark> Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea. | Explanation: inaccuracy regarding the amount of time. |
 
-*Disagree:* incorrect information.<br>
-&emsp; Probiotics can be taken at the same time as the antibiotic. <mark> Antibiotics do not reduce the effectiveness of probiotics </mark> at decreasing the risk of antibiotic-associated diarrhea.
+| *Disagree:*    |            |
+| :---           |       ---: |
+&emsp; Probiotics can be taken at the same time as the antibiotic. <mark> Antibiotics do not reduce the effectiveness of probiotics </mark> at decreasing the risk of antibiotic-associated diarrhea. | Explanation: incorrect information. |
 
 :blue[**Relevance**]: The answer addresses the specific medical question asked. <br>
 *Agree:* <br>
