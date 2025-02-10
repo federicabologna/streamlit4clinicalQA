@@ -1,3 +1,9 @@
+<style>
+td, th {
+   border: none!important;
+}
+</style>
+
 Thank you for your participation. You will be presented with a batch of 9 question-answer pairs.
 
 Each pair will contain:
@@ -23,9 +29,6 @@ Here are some examples:
 | *Agree*:    |            |
 | :---        |       ---: |
 | &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> | Explanatio: correct information. |
-| Paragraph   | And more      |
- correct information.<br>
- <br>
 
 *Partially Agree:* does not mention the lack of consensus on the effectiveness of probiotics.<br>
 &emsp; It is generally recommended to take probiotics at least 2 hours after the antibiotic. <mark>Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.</mark> <br>
