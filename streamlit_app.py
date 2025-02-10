@@ -1,4 +1,6 @@
 import os
+import time
+from datetime import date
 import streamlit as st
 from pymongo.mongo_client import MongoClient
 
@@ -20,21 +22,40 @@ if 'responses_todo' not in st.session_state:
 if 'responses_done' not in st.session_state:
     st.session_state.responses_done = []
 
-def assign_states(key, corr, rel, saf):
+if 'main_likert' not in st.session_state:
+    st.session_state.main_likert = {"Disagree": 0,
+                                    "Partially Disagree": 1,
+                                    "Neutral": 2,
+                                    "Partially Agree": 3,
+                                    "Agree": 4}
+if 'conf_likert' not in st.session_state:
+    st.session_state.confidence_likert = {"Not confident": 0,
+                                          "Slightly confident": 1,
+                                          "Somewhat confident": 2,
+                                          "Fairly confident": 3,
+                                          "Very confident": 4}
+if 'ease_likert' not in st.session_state:
+    st.session_state.ease_likert = {"Very difficult": 0,
+                                    "Somewhat difficult": 1,
+                                    "Neither difficult nor easy": 2,
+                                    "Somewhat easy": 3,
+                                    "Very easy": 4}
+
+def assign_states(key, corr, rel, saf, conf):
     st.session_state[f'corr_{key}'] = corr
     st.session_state[f'rel_{key}'] = rel
     st.session_state[f'saf_{key}'] = saf
+    st.session_state[f'conf_{key}'] = conf
 
 def likert2index(key):
     
     if key in st.session_state:
         if st.session_state[key] != None:
+            if 'conf' in key:
+                d = st.session_state.confidence_likert
+            else:
+                d = st.session_state.main_likert
             s = st.session_state[key]
-            d = {"Disagree": 0,
-                "Partially Disagree": 1,
-                "Neutral": 2,
-                "Partially Agree": 3,
-                "Agree": 4}
             return d[s]
         else:
             return None
@@ -112,6 +133,8 @@ def instructions_page2():
 
 def questions_page3():
     
+    start = time.time()
+    
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
@@ -130,11 +153,11 @@ def questions_page3():
             st.subheader("The information provided in the answer:")
             annotation_id = annotation_d['answer_id']
         elif annotation_type == 'fine':
-            st.subheader("The information provided in the sentence:")
+            st.subheader("The information provided in the highlighted sentence:")
             annotation_id = annotation_d['sentence_id']
         
         
-        likert_options = ["Disagree","Partially Disagree","Neutral","Partially Agree","Agree"]
+        likert_options = st.session_state.main_likert.keys()
         
         st.markdown('#### :green[aligns with current medical knowledge]')
         correctness = st.radio(":green[aligns with current medical knowledge]",
@@ -151,6 +174,13 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
+    
+    st.markdown('##### How confident do you feel about your annotation?')
+    confidence = st.radio("How confident do you feel about your annotation?",
+                            options=st.session_state.confidence_likert.keys(),
+                            horizontal=True, index=likert2index(f'conf_{annotation_id}'),
+                            label_visibility='hidden', key=f'cnf_{annotation_id}')
+    
     st.markdown('''**Feel free to consult 
                 [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).**''')
         
@@ -165,9 +195,11 @@ def questions_page3():
 
     elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
     
-        if correctness is not None and relevance is not None and safety is not None: # Check if all questions are answered
+        if correctness is not None and relevance is not None and safety is not None and confidence is not None: # Check if all questions are answered
             
-            assign_states(annotation_id, correctness, relevance, safety) # Save user input to session state
+            elapsed_time = time.time() - start
+            
+            assign_states(annotation_id, correctness, relevance, safety, confidence) # Save user input to session state
             st.session_state.responses_done.append(annotation_d)
             st.session_state.responses_todo.pop(0)
             
@@ -176,14 +208,17 @@ def questions_page3():
                                                                 {"$set": {"rated": "Yes",
                                                                           "correctness": correctness,
                                                                           "relevance": relevance,
-                                                                          "safety": safety}})  # Update: change rated to yes
+                                                                          "safety": safety,
+                                                                          "time": elapsed_time,
+                                                                          "confidence": confidence}})  # Update: change rated to yes
             elif annotation_type == 'fine':
                 update_status = annotations_collection.update_one({"sentence_id": annotation_id},  # Find the document with _id = 1
                                                                 {"$set": {"rated": "Yes",
                                                                           "correctness": correctness,
                                                                           "relevance": relevance,
-                                                                          "safety": safety}})
-            
+                                                                          "safety": safety,
+                                                                          "time": elapsed_time,
+                                                                          "confidence": confidence}})
  
             # if annotation done is less then total number per batch
             if len(st.session_state.responses_todo) > 0: 
@@ -196,8 +231,22 @@ def questions_page3():
         else:
             st.markdown(":orange[**Please answer all the questions.**]")
 
+def followup_page4():
+
+    st.markdown('##### How easy to follow are the annotation instructions?')
+    safety = st.radio("How easy to follow are the annotation instructions?",
+                            options=st.session_state.ease_likert.keys(),
+                            horizontal=True, index=likert2index(f'ease_{annotation_id}'),
+                            label_visibility='hidden', key=f'e_{annotation_id}')
+    
+    mongodb_credentials = st.secrets.mongodb_credentials
+    uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
+    # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
+    client = MongoClient(uri)     # Create a new client and connect to the server
+    db = client['feedback']  # database
+    db[f'annotator{st.session_state.annotator_id}'].insertOne({'date': })
         
-def end_page4():
+def end_page5():
     st.title("Thank You!")
     st.write("You have completed the batch. Your responses have been saved.")
 
@@ -210,7 +259,9 @@ if st.session_state.page == 2:
 elif st.session_state.page == 3:
     questions_page3()
 elif st.session_state.page == 4:
-    end_page4()
+    followup_page4()
+elif st.session_state.page == 5:
+    end_page5()
 
 
 if len(st.session_state.responses_done) > 0:

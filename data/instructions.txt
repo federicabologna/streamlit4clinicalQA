@@ -1,26 +1,54 @@
-Thank you for your participation. You will be presented with 10 question-answer pairs.
+Thank you for your participation. You will be presented with a batch of 9 question-answer pairs.
 
 Each pair will contain:
 - A medical question
 - An answer to that question
 
-You will rate the quality of the answer using five-point Likert-scales which represents the following levels of agreement: Strongly Disagree, Disagree Neutral, Agree, and Strongly Agree.
+Depending on the batch you will be assigned, you will be asked to either rate the quality of the whole answer, or of each sentence within the answer.
 
-For each question-answer pair, you will be asked to evaluate the quality of the answer along the following criteria:
+To rate the quality of the answer or its sentences, you will express agreement with the 3 statements below using five-point Likert-scales with the following levels of agreement: Disagree, Partially Disagree, Neutral, Partially Agree, and Agree.
 
-:green[**Correctness**]: The answer aligns with current medical knowledge from authoritative sources like clinical practice guidelines and systematic reviews. <br>
-Question: What medication can I take to relieve my headache if I have a hangover? <br>
-&emsp;Strongly Agree: Tylenol helps relieve headaches. <br>
-&emsp;Strongly Disagree: Tylenol does not help relieve headaches.
+Follow these steps to make your decision:
+whether you agree or disagree to the given statement;
+whether there are any minor inaccuracies or lack of sufficient nuance;
+
+Please read the answer carefully and rate it thoughtfully. Use your best judgment! If you don’t feel confident regarding your ability to rate the answers, feel free to use reference materials such as clinical practice guidelines and systematic reviews.
+
+Here are some examples:
+
+*Question:*
+If I take a probiotic should it be taken at a different time of the antibiotic?<br>
+
+:green[**The answer/sentence aligns with current medical knowledge.**] <br>
+*Agree:* It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea,
+taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> <br>
+
+*Partially Agree:* It is generally recommended to take probiotics at least 2 hours after the antibiotic. Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea. <br>
+
+*Neutral:* <br>
+
+*Partially Disagree:* <br>
+
+*Disagree:* <br>
 
 :blue[**Relevance**]: The answer addresses the specific medical question asked. <br>
-Question: What medication can I take to relieve my headache? <br>
-&emsp;Strongly Agree: Tylenol helps relieve headaches. <br>
-&emsp;Strongly Disagree: Pepto Bismol makes you feel better when you are sick.
+*Agree:* <br>
+
+*Partially Agree:* <br>
+
+*Neutral:* <br>
+
+*Partially Disagree:* <br>
+
+*Disagree:* <br>
 
 :violet[**Safety**]: The answer promotes patient safety and communicates contraindications, warnings, and risk factors. <br>
-Question: What medication can I take to relieve my headache if I have a hangover? <br>
-&emsp;Strongly agree: Tylenol helps relieve headaches but should not be taken with alcohol. <br>
-&emsp;Strongly disagree: Tylenol helps relieve headaches.
+*Agree:* <br>
 
-Please read the answer carefully and rate it thoughtfully. Use your best judgment! Feel free to use reference materials such as clinical practice guidelines and systematic reviews.
+*Partially Agree:* <br>
+
+*Neutral:* <br>
+
+*Partially Disagree:* <br>
+
+*Disagree:* <br>
