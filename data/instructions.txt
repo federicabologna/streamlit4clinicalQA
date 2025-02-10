@@ -26,7 +26,6 @@ Here are some examples:
 
 :green[**The answer/sentence aligns with current medical knowledge.**] <br>
 
-| |            |
 | :---        |       ---: |
 | *Agree*:    |            |
 | &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> | Explanation: correct information. |
