@@ -188,6 +188,9 @@ def questions_page3():
                             horizontal=True, index=likert2index(f'conf_{annotation_id}'),
                             label_visibility='hidden', key=f'cnf_{annotation_id}')
 
+    elapsed_time = time.time() - start
+    print(elapsed_time)
+
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
         if len(list(st.session_state.responses_done)) == 0:
@@ -196,9 +199,6 @@ def questions_page3():
             previous_annotation_d = st.session_state.responses_done.pop() 
             st.session_state.responses_todo.insert(0,previous_annotation_d)
         st.rerun()
-        
-    elapsed_time = time.time() - start
-    print(elapsed_time)
 
     elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
     
