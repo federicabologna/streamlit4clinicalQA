@@ -251,9 +251,18 @@ def followup_page4():
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['feedback']  # database
-    collection = db[f'annotator{st.session_state.annotator_id}'].insert_one({'batch': st.session_state.responses_done,
+    
+    leftleft, left, middle, right, rightright = st.columns(5)
+    if left.button(":arrow_backward: Back", use_container_width=True):
+        st.session_state.page = st.session_state.page - 1
+        st.rerun()
+
+    elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
+        collection = db[f'annotator{st.session_state.annotator_id}'].insert_one({'batch': st.session_state.responses_done,
                                                                'datetime': datetime.now(),
                                                                'ease': ease})
+        st.session_state.page = 5
+        st.rerun()
         
 def end_page5():
     st.title("Thank You!")
