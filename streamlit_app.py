@@ -147,6 +147,8 @@ def questions_page3():
     
     if annotation_id not in st.session_state.times.keys()
         st.session_state.times[annotation_id] = {'start': time.time()}
+    else:
+        st.markdown(st.session_state.times[annotation_id])
     
     col1, col2 = st.columns(2)
     with col1:
