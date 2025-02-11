@@ -140,10 +140,8 @@ def questions_page3():
     annotations_collection = st.session_state.annotation_collection
     
     if annotation_type == 'coarse':
-        st.subheader("The information provided in the answer:")
         annotation_id = annotation_d['answer_id']
     elif annotation_type == 'fine':
-        st.subheader("The information provided in the highlighted sentence:")
         annotation_id = annotation_d['sentence_id']
     
     if annotation_id not in st.session_state.times.keys():
@@ -160,7 +158,10 @@ def questions_page3():
         st.markdown(annotation_d['answer'])
     
     with col2:
-        
+        if annotation_type == 'coarse':
+            st.subheader("The information provided in the answer:")
+        elif annotation_type == 'fine':
+            st.subheader("The information provided in the highlighted sentence:")
         likert_options = st.session_state.main_likert.keys()
         
         st.markdown('#### :green[aligns with current medical knowledge]')
