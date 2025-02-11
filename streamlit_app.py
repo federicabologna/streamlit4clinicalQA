@@ -251,7 +251,7 @@ def followup_page4():
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['feedback']  # database
-    db[f'annotator{st.session_state.annotator_id}'].insertOne({'batch': st.session_state.responses_done
+    db[f'annotator{st.session_state.annotator_id}'].insertOne({'batch': st.session_state.responses_done,
                                                                'datetime': datetime.now(),
                                                                'ease': ease})
         
