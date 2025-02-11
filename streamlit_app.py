@@ -21,7 +21,8 @@ if 'responses_todo' not in st.session_state:
     st.session_state.responses_todo = []
 if 'responses_done' not in st.session_state:
     st.session_state.responses_done = []
-if 'times' not in st.session_state.times = {}
+if 'times' not in st.session_state:
+    st.session_state.times = {}
 
 if 'main_likert' not in st.session_state:
     st.session_state.main_likert = {"Disagree": 0,
