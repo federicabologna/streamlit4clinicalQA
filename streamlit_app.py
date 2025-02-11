@@ -135,7 +135,11 @@ def instructions_page2():
 
 def questions_page3():
     
-    annotation_d = st.session_state.responses_todo[0]
+    if st.session_state.responses_todo:
+        annotation_d = st.session_state.responses_todo[0]
+    else:
+        annotation_d = st.session_state.responses_done[-1]
+    
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
     
