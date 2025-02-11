@@ -21,6 +21,7 @@ if 'responses_todo' not in st.session_state:
     st.session_state.responses_todo = []
 if 'responses_done' not in st.session_state:
     st.session_state.responses_done = []
+if 'times' not in st.session_state.times = {}
 
 if 'main_likert' not in st.session_state:
     st.session_state.main_likert = {"Disagree": 0,
@@ -133,14 +134,21 @@ def instructions_page2():
 
 def questions_page3():
     
-    start = time.time()
-    
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
     
-    col1, col2 = st.columns(2)
+    if annotation_type == 'coarse':
+        st.subheader("The information provided in the answer:")
+        annotation_id = annotation_d['answer_id']
+    elif annotation_type == 'fine':
+        st.subheader("The information provided in the highlighted sentence:")
+        annotation_id = annotation_d['sentence_id']
     
+    if annotation_id not in st.session_state.times.keys()
+        st.session_state.times[annotation_id] = {'start': time.time()}
+    
+    col1, col2 = st.columns(2)
     with col1:
         st.header("Question")
         st.markdown(annotation_d['question'])
@@ -149,13 +157,6 @@ def questions_page3():
         st.markdown(annotation_d['answer'])
     
     with col2:
-        if annotation_type == 'coarse':
-            st.subheader("The information provided in the answer:")
-            annotation_id = annotation_d['answer_id']
-        elif annotation_type == 'fine':
-            st.subheader("The information provided in the highlighted sentence:")
-            annotation_id = annotation_d['sentence_id']
-        
         
         likert_options = st.session_state.main_likert.keys()
         
@@ -174,11 +175,10 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    # st.markdown('#### ')
     st.divider()
     st.markdown('#### Feel free to consult [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
-    # st.markdown('#### ')
     st.divider()
+    
     col1, col2 = st.columns([1,2])
     with col1:
         st.markdown('#### How confident do you feel about your annotation?')
@@ -187,9 +187,6 @@ def questions_page3():
                             options=st.session_state.confidence_likert.keys(),
                             horizontal=True, index=likert2index(f'conf_{annotation_id}'),
                             label_visibility='hidden', key=f'cnf_{annotation_id}')
-
-    elapsed_time = time.time() - start
-    st.markdown(elapsed_time)
 
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
@@ -208,8 +205,9 @@ def questions_page3():
             st.session_state.responses_done.append(annotation_d)
             st.session_state.responses_todo.pop(0)
             
-            elapsed_time = time.time() - start
-            print(elapsed_time)
+            if 'end' not in st.session_state.times[annotation_id].keys()
+                st.session_state.times[annotation_id]['end'] = time.time()
+            elapsed_time = st.session_state.times[annotation_id]['end'] - st.session_state.times[annotation_id]['start']
             
             if annotation_type == 'coarse':
                 update_status = annotations_collection.update_one({"answer_id": annotation_id},  # Find the document with _id = 1
