@@ -189,7 +189,7 @@ def questions_page3():
                             label_visibility='hidden', key=f'cnf_{annotation_id}')
 
     elapsed_time = time.time() - start
-    print(elapsed_time)
+    st.markdown(elapsed_time)
 
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
