@@ -174,14 +174,17 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    st.markdown('##### ')
-    st.markdown('##### How confident do you feel about your annotation?')
+    st.markdown('#### ')
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown('#### How confident do you feel about your annotation?')
+    with col2:
     confidence = st.radio("How confident do you feel about your annotation?",
                             options=st.session_state.confidence_likert.keys(),
                             horizontal=True, index=likert2index(f'conf_{annotation_id}'),
                             label_visibility='hidden', key=f'cnf_{annotation_id}')
     
-    st.markdown('''**Feel free to consult 
+    st.markdown('''#### Feel free to consult 
                 [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).**''')
         
     leftleft, left, middle, right, rightright = st.columns(5)
