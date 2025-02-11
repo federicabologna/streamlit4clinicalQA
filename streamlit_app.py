@@ -146,7 +146,7 @@ def questions_page3():
         st.subheader("The information provided in the highlighted sentence:")
         annotation_id = annotation_d['sentence_id']
     
-    if annotation_id not in st.session_state.times.keys()
+    if annotation_id not in st.session_state.times.keys():
         st.session_state.times[annotation_id] = {'start': time.time()}
     else:
         st.markdown(st.session_state.times[annotation_id])
@@ -208,7 +208,7 @@ def questions_page3():
             st.session_state.responses_done.append(annotation_d)
             st.session_state.responses_todo.pop(0)
             
-            if 'end' not in st.session_state.times[annotation_id].keys()
+            if 'end' not in st.session_state.times[annotation_id].keys():
                 st.session_state.times[annotation_id]['end'] = time.time()
             elapsed_time = st.session_state.times[annotation_id]['end'] - st.session_state.times[annotation_id]['start']
             
