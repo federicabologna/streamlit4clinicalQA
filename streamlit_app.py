@@ -196,16 +196,20 @@ def questions_page3():
             previous_annotation_d = st.session_state.responses_done.pop() 
             st.session_state.responses_todo.insert(0,previous_annotation_d)
         st.rerun()
+        
+    elapsed_time = time.time() - start
+    print(elapsed_time)
 
     elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
     
         if correctness is not None and relevance is not None and safety is not None and confidence is not None: # Check if all questions are answered
             
-            elapsed_time = time.time() - start
-            
             assign_states(annotation_id, correctness, relevance, safety, confidence) # Save user input to session state
             st.session_state.responses_done.append(annotation_d)
             st.session_state.responses_todo.pop(0)
+            
+            elapsed_time = time.time() - start
+            print(elapsed_time)
             
             if annotation_type == 'coarse':
                 update_status = annotations_collection.update_one({"answer_id": annotation_id},  # Find the document with _id = 1
