@@ -135,11 +135,7 @@ def instructions_page2():
 
 def questions_page3():
     
-    if st.session_state.responses_todo:
-        annotation_d = st.session_state.responses_todo[0]
-    else:
-        annotation_d = st.session_state.responses_done[-1]
-    
+    annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
     
@@ -196,7 +192,7 @@ def questions_page3():
 
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
-        if len(list(st.session_state.responses_done)) == 0:
+        if len(st.session_state.responses_done) == 0:
             st.session_state.page = st.session_state.page - 1
         else:
             previous_annotation_d = st.session_state.responses_done.pop() 
@@ -258,6 +254,8 @@ def followup_page4():
     
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
+        previous_annotation_d = st.session_state.responses_done.pop() 
+        st.session_state.responses_todo.insert(0,previous_annotation_d)
         st.session_state.page = st.session_state.page - 1
         st.rerun()
 
