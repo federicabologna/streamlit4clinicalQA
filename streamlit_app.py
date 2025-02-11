@@ -174,7 +174,7 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    
+    st.markdown('##### ')ad
     st.markdown('##### How confident do you feel about your annotation?')
     confidence = st.radio("How confident do you feel about your annotation?",
                             options=st.session_state.confidence_likert.keys(),
