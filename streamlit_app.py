@@ -135,7 +135,7 @@ def instructions_page2():
 
 def questions_page3():
     
-    st.markdown(st.session_state.responses_todo)
+    st.markdown([d['question_id'] for d in st.session_state.responses_todo])
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
