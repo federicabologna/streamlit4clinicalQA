@@ -240,7 +240,8 @@ def questions_page3():
             st.markdown(":orange[**Please answer all the questions.**]")
 
 def followup_page4():
-
+    st.markdown('#### Final question before you go...')
+    
     st.markdown('#### How easy to follow were the annotation instructions?')
     ease = st.radio("How easy to follow were the annotation instructions?",
                             options=st.session_state.ease_likert.keys(),
@@ -268,7 +269,7 @@ def followup_page4():
         
 def end_page5():
     st.title("Thank You!")
-    st.write("You have completed the batch. Your responses have been saved.")
+    st.markdown("#### You have completed the batch. Your responses have been saved.")
 
 
 # Display the appropriate page based on the session state
