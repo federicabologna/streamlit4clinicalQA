@@ -261,7 +261,7 @@ def followup_page4():
         st.rerun()
 
     elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
-        collection = db[f'annotator{st.session_state.annotator_id}'].insert_one({'batch': st.session_state.responses_done,
+        collection = db[f'annotator{st.session_state.annotator_id}'].insert_one({'batch': [(d['question_id'], d['answer_id']) for d in st.session_state.responses_done],
                                                                'datetime': datetime.now(),
                                                                'ease': ease})
         st.session_state.page = 5
