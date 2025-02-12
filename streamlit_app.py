@@ -85,10 +85,11 @@ def dispatch_batch():
             
             batch_ids = set()
             for i in annotations_collection.find({"rated": "No"}):
-                batch_ids.add(i.get('answer_id'))
+                batch_ids.add(i.get('question_id'))
 
             batch_data = []
-            for i in list(batch_ids)[:n_annotations]:
+            n_questions = 9/3
+            for i in list(batch_ids)[:n_questions]:
                 batch_data.extend([i for i in annotations_collection.find({"answer_id":i})])#, "rated": "No"})])
 
         st.session_state.responses_todo = batch_data
