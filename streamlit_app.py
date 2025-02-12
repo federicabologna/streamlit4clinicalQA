@@ -242,8 +242,8 @@ def questions_page3():
 def followup_page4():
     st.markdown('#### Final question before you go...')
     
-    st.markdown('#### How easy to follow were the annotation instructions?')
-    ease = st.radio("How easy to follow were the annotation instructions?",
+    st.markdown('#### Was it easy to follow the annotation instructions?')
+    ease = st.radio("Was it easy to follow the annotation instructions?",
                             options=st.session_state.ease_likert.keys(),
                             horizontal=True, index=None,
                             label_visibility='hidden')
