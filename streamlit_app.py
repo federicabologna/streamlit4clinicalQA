@@ -90,7 +90,7 @@ def dispatch_batch():
             batch_data = []
             n_questions = 9/3
             for i in list(batch_ids)[:n_questions]:
-                batch_data.extend([i for i in annotations_collection.find({"answer_id":i})])#, "rated": "No"})])
+                batch_data.extend([i for i in annotations_collection.find({"question_id":i})])#, "rated": "No"})])
 
         st.session_state.responses_todo = batch_data
         st.session_state.total_responses = len(batch_data)
