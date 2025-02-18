@@ -12,6 +12,8 @@ st.set_page_config(layout="wide", page_title="Clinical QA Annotation")
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 1
+if 'batch_id' not in st.session_state:
+    st.session_state.batch_id = None
 if 'batch_size' not in st.session_state:
     st.session_state.batch_size = 9
 if 'annotator_id' not in st.session_state:
@@ -89,12 +91,17 @@ def identifiers_page1():
                 [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
                 and that you consent to participate in the study.**''')
 
+    with open(os.path.join(f"animals.json"), 'r', encoding='utf-8') as json_file:
+        animals = json.load(json_file)
+
     annotator_id = st.text_input("Annotator ID:")
+    
+    password = st.text_input("Password:")
 
     leftleft, left, middle, right, rightright = st.columns(5)
-
-    if right.button("Next :arrow_forward:", use_container_width=True) or annotator_id:
-        if annotator_id:
+    if (right.button("Next :arrow_forward:", use_container_width=True) and password == animals[str(annotator_id)]) 
+    or (annotator_id) and password == animals[str(annotator_id)]:
+        if annotator_id :
             st.session_state.annotator_id = annotator_id
             st.write("Loading your annotations...")
             dispatch_batch()
