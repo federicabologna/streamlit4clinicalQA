@@ -136,15 +136,23 @@ def instructions_page2():
 
 def questions_page3():
     
-    time.sleep(.5)
-    js = '''
+    # time.sleep(.5)
+    # js = '''
+    #     <script>
+    #         var body = window.parent.document.querySelector(".main");
+    #         console.log(body);
+    #         body.scrollTop = 0;
+    #     </script>
+    #     '''
+    # st.components.v1.html(js, height=0)
+    st.markdown(
+        """
         <script>
-            var body = window.parent.document.querySelector(".main");
-            console.log(body);
-            body.scrollTop = 0;
+            window.scrollTo(0, 0);
         </script>
-        '''
-    st.components.v1.html(js, height=0)
+        """,
+        unsafe_allow_html=True
+    )
     
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
@@ -240,16 +248,7 @@ def questions_page3():
                                                                           "confidence": confidence}})
  
             # if annotation done is less then total number per batch
-            if len(st.session_state.responses_todo) > 0: 
-                time.sleep(.5)
-                js = '''
-                    <script>
-                        var body = window.parent.document.querySelector(".main");
-                        console.log(body);
-                        body.scrollTop = 0;
-                    </script>
-                    '''
-                st.components.v1.html(js, height=0)
+            if len(st.session_state.responses_todo) > 0:
                 st.session_state.page = 3 # Repeat page
                 st.rerun()
             # otherwise
