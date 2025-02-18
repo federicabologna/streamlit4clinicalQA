@@ -146,6 +146,8 @@ def questions_page3():
         '''
     st.components.v1.html(js, height=0)
     
+    st.markdown([(d['question_id'], d['sentence_id']) for d in st.session_state.responses_todo])
+    
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
