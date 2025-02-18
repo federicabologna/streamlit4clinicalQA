@@ -8,31 +8,6 @@ from pymongo.mongo_client import MongoClient
 # Set page configuration
 st.set_page_config(layout="wide", page_title="Clinical QA Annotation")
 
-st.markdown(
-    """
-    <style>
-        #scroll-top-btn {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        }
-    </style>
-
-    <button id="scroll-top-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
-        ⬆ Scroll to Top
-    </button>
-    """,
-    unsafe_allow_html=True
-)
-
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 1
