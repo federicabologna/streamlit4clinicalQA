@@ -83,6 +83,7 @@ def dispatch_batch():
     st.session_state.total_responses = len(batch_data)
     
     if len(batch_data) == 0:
+        st.markdown("#### You have completed your coarse annotations. Please move on to the fine annotations. Thank you!")
         
 
 def identifiers_page1():
