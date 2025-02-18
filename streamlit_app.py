@@ -190,6 +190,7 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
+    st.divider()
     col1, col2 = st.columns([1,2])
     with col1:
         st.markdown('#### How confident do you feel about your annotation?')
