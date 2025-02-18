@@ -136,23 +136,6 @@ def instructions_page2():
 
 def questions_page3():
     
-    time.sleep(.5)
-    # js = '''
-    #     <script>
-    #         var body = window.parent.document.querySelector(".main");
-    #         console.log(body);
-    #         body.scrollTop = 0;
-    #     </script>
-    #     '''
-    # st.components.v1.html(js)
-    scroll_js = """
-    <script>
-        window.scrollTo(0, 0);
-    </script>
-    """
-
-    st.components.v1.html(scroll_js, height=0)
-    
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
@@ -172,6 +155,16 @@ def questions_page3():
         
         st.header("Answer")
         st.markdown(annotation_d['answer'])
+        
+        time.sleep(.5)
+        js = '''
+            <script>
+                var body = window.parent.document.querySelector(".main");
+                console.log(body);
+                body.scrollTop = 0;
+            </script>
+            '''
+        st.components.v1.html(js, height=0)
     
     with col2:
         if annotation_type == 'coarse':
