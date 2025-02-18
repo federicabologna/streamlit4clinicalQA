@@ -139,7 +139,7 @@ def questions_page3():
     st.markdown([d['question_id'] for d in st.session_state.responses_todo])
     
     annotation_d = st.session_state.responses_todo[0]
-    annotation_type == 'coarse'
+    annotation_type = 'coarse'
     annotations_collection = st.session_state.annotation_collection
     
     annotation_id = annotation_d['answer_id']
