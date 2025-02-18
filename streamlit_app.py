@@ -155,7 +155,9 @@ def questions_page3():
         
         st.header("Answer")
         st.markdown(annotation_d['answer'])
-    
+        
+        st.markdown('#### [:clipboard: Annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
+
     with col2:
         if annotation_type == 'coarse':
             st.subheader("The information provided in the answer:")
@@ -178,8 +180,6 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    st.divider()
-    st.markdown('#### Feel free to consult [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
     st.divider()
     
     col1, col2 = st.columns([1,2])
