@@ -157,13 +157,11 @@ def questions_page3():
         st.markdown(annotation_d['answer'])
         
         time.sleep(.5)
-        js = '''
-            <script>
-                var body = window.parent.document.querySelector(".main");
-                console.log(body);
-                body.scrollTop = 0;
-            </script>
-            '''
+        js = """
+        <script>
+            window.scrollTo(0, 0);
+        </script>
+        """
         st.components.v1.html(js, height=0)
     
     with col2:
