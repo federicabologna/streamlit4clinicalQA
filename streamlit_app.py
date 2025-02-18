@@ -99,9 +99,9 @@ def identifiers_page1():
             dispatch_batch()
             if st.session_state.total_responses > 0:
                 st.session_state.page = 2
-                st.rerun()
             else:
-                st.markdown("#### You have completed your coarse annotations. Please move on to the fine annotations. Thank you!")
+                st.session_state.page = 6
+            st.rerun()
         else:
             st.write(":orange[Please enter your Annotator ID.]")
             
@@ -253,9 +253,13 @@ def followup_page4():
         st.session_state.page = 5
         st.rerun()
         
-def end_page5():
+def batch_end_page5():
     st.title("Thank You!")
     st.markdown("#### You have completed the batch. Your responses have been saved.")
+
+def coarse_end_page6():
+    st.title("Thank You!")
+    st.markdown("#### You have completed all your coarse annotations. Please move on to the fine annotations.")
 
 
 # Display the appropriate page based on the session state
@@ -268,7 +272,9 @@ elif st.session_state.page == 3:
 elif st.session_state.page == 4:
     followup_page4()
 elif st.session_state.page == 5:
-    end_page5()
+    batch_end_page5()
+elif st.session_state.page == 6:
+    coarse_end_page6()
 
 
 if len(st.session_state.responses_done) > 0:
