@@ -136,7 +136,7 @@ def instructions_page2():
 
 def questions_page3():
     
-    # time.sleep(.5)
+    time.sleep(.5)
     # js = '''
     #     <script>
     #         var body = window.parent.document.querySelector(".main");
@@ -145,6 +145,13 @@ def questions_page3():
     #     </script>
     #     '''
     # st.components.v1.html(js)
+    scroll_js = """
+    <script>
+        window.scrollTo(0, 0);
+    </script>
+    """
+
+    st.components.v1.html(scroll_js, height=0)
     
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
@@ -165,8 +172,6 @@ def questions_page3():
         
         st.header("Answer")
         st.markdown(annotation_d['answer'])
-        # st.divider()
-        # st.markdown('##### Feel free to consult [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
     
     with col2:
         if annotation_type == 'coarse':
@@ -190,15 +195,18 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    # st.divider()
-    # col1, col2 = st.columns([1,2])
-    # with col1:
-    #     st.markdown('#### How confident do you feel about your annotation?')
-    # with col2:
-    #     confidence = st.radio("How confident do you feel about your annotation?",
-    #                         options=st.session_state.confidence_likert.keys(),
-    #                         horizontal=True, index=likert2index(f'conf_{annotation_id}'),
-    #                         label_visibility='hidden', key=f'cnf_{annotation_id}')
+    st.divider()
+    st.markdown('#### Feel free to consult [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
+    st.divider()
+    
+    col1, col2 = st.columns([1,2])
+    with col1:
+        st.markdown('#### How confident do you feel about your annotation?')
+    with col2:
+        confidence = st.radio("How confident do you feel about your annotation?",
+                            options=st.session_state.confidence_likert.keys(),
+                            horizontal=True, index=likert2index(f'conf_{annotation_id}'),
+                            label_visibility='hidden', key=f'cnf_{annotation_id}')
 
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
