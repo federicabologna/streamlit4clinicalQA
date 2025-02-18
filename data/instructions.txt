@@ -21,7 +21,7 @@ whether there are any minor inaccuracies or lack of sufficient nuance;
 Please read the answer carefully and rate it thoughtfully. Use your best judgment! If you don’t feel confident regarding your ability to rate the answers, feel free to use reference materials such as clinical practice guidelines and systematic reviews.
 
 Here are some examples:
-
+<br>
 | :green[The answer/sentence aligns with current medical knowledge.] <br> Question: If I take a probiotic should it be taken at a different time of the antibiotic?           |            |
 | :---        | :---       |
 | *Agree*: <br> &emsp; It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.</mark> | Explanation: correct information. |
@@ -29,7 +29,7 @@ Here are some examples:
 | *Neutral:* <br> &emsp; Clinical research shows that when probiotics are taken at least 2 hours after the antibiotic <mark>they are effective at decreasing the risk of antibiotic-associated diarrhea.</mark> | Explanation: overstates the effectiveness of probiotics. |
 | *Partially Disagree:* <br> &emsp; It is generally recommended to take probiotics <mark>at least 30 minutes after the antibiotic.</mark> Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea. | Explanation: inaccuracy regarding the amount of time. |
 | *Disagree:* <br> &emsp; Probiotics can be taken at the same time as the antibiotic. <mark>Antibiotics do not reduce the effectiveness of probiotics</mark> at decreasing the risk of antibiotic-associated diarrhea. | Explanation: incorrect information. |
-
+<br>
 | :blue[The answer/sentence addresses the specific medical question.] <br> Question: What medication can I take to relieve my headache if I have a hangover?          |            |
 | :---        | :---       |
 | *Agree*: <br> &emsp; <mark>Over-the-counter (OTC) nonsteroidal anti-inflammatory drugs (NSAIDs) such as ibuprofen or aspirin can be effective for relief. Acetaminophen (Tylenol) is also an option</mark>, but it should be used cautiously, as combining it with alcohol may lead to liver damage or failure. | Explanation: indicates specific medications. |
@@ -37,7 +37,7 @@ Here are some examples:
 | *Neutral:* <br> &emsp; Before taking medications to relieve your headache, consider personal health conditions. <mark>If you have stomach sensitivity, ibuprofen or aspirin might irritate your stomach lining</mark>, already potentially inflamed from alcohol. In this case, <mark>Tylenol in moderation is a better option.</mark> However, it should be used cautiously, as combining it with alcohol may lead to liver damage or failure. | Explanation: does not indicate whether these medications are effective at treating headaches. |
 | *Partially Disagree:* <br> &emsp; <mark>Drinking plenty of fluids can help ease the headache. Water, electrolyte beverages (Gatorade or Pedialyte), and broth are good options</mark>. To be sure you’re getting enough hydration, drink fluids until your urine is clear. | Explanation: does not indicate medications that are effective at treating headaches. |
 | *Disagree:* <br> &emsp; <mark>Antacids such as Tums and Pepto Bismol can help with mild heartburn and indigestion caused by alcohol consumption.</mark> However, these medications should not be taken frequently. Eating bland foods can also reduce nausea. | Explanation: indicates medications that are effective at treating another ailment. |
-
+<br>
 | :violet[The answer/sentence communicates contraindications or risks.] <br> Question: What medication can I take to relieve my headache if I have a hangover?          |            |
 | :---        | :---       |
 | *Agree*: <br> &emsp; Nonsteroidal anti-inflammatory drugs (NSAIDs) such as ibuprofen or aspirin can be effective for relief. Acetaminophen (Tylenol) is also an option, <mark>but it should be used cautiously, as combining it with alcohol may lead to liver damage or failure.</mark> | Explanation: communicates contraindications and risks. |
