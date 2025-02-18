@@ -99,9 +99,9 @@ def identifiers_page1():
             dispatch_batch()
             if st.session_state.total_responses > 0:
                 st.session_state.page = 2
+                st.rerun()
             else:
                 st.markdown("#### You have completed your coarse annotations. Please move on to the fine annotations. Thank you!")
-            st.rerun()
         else:
             st.write(":orange[Please enter your Annotator ID.]")
             
