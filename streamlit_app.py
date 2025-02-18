@@ -136,15 +136,15 @@ def instructions_page2():
 
 def questions_page3():
     
-    time.sleep(.5)
-    js = '''
-        <script>
-            var body = window.parent.document.querySelector(".main");
-            console.log(body);
-            body.scrollTop = 0;
-        </script>
-        '''
-    st.components.v1.html(js)
+    # time.sleep(.5)
+    # js = '''
+    #     <script>
+    #         var body = window.parent.document.querySelector(".main");
+    #         console.log(body);
+    #         body.scrollTop = 0;
+    #     </script>
+    #     '''
+    # st.components.v1.html(js)
     
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
@@ -165,6 +165,8 @@ def questions_page3():
         
         st.header("Answer")
         st.markdown(annotation_d['answer'])
+         st.divider()
+        st.markdown('##### Feel free to consult [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
     
     with col2:
         if annotation_type == 'coarse':
@@ -189,9 +191,6 @@ def questions_page3():
                             label_visibility='hidden', key=f's_{annotation_id}')
     
     st.divider()
-    st.markdown('#### Feel free to consult [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
-    st.divider()
-    
     col1, col2 = st.columns([1,2])
     with col1:
         st.markdown('#### How confident do you feel about your annotation?')
@@ -241,15 +240,15 @@ def questions_page3():
  
             # if annotation done is less then total number per batch
             if len(st.session_state.responses_todo) > 0: 
-                time.sleep(.5)
-                js = '''
-                    <script>
-                        var body = window.parent.document.querySelector(".main");
-                        console.log(body);
-                        body.scrollTop = 0;
-                    </script>
-                    '''
-                st.components.v1.html(js)
+                # time.sleep(.5)
+                # js = '''
+                #     <script>
+                #         var body = window.parent.document.querySelector(".main");
+                #         console.log(body);
+                #         body.scrollTop = 0;
+                #     </script>
+                #     '''
+                # st.components.v1.html(js)
                 st.session_state.page = 3 # Repeat page
                 st.rerun()
             # otherwise
