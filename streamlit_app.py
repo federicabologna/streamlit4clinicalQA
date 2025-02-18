@@ -117,6 +117,7 @@ def identifiers_page1():
             
 
 def instructions_page2():
+    
     st.header("Instructions")
     
     with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
@@ -240,6 +241,15 @@ def questions_page3():
  
             # if annotation done is less then total number per batch
             if len(st.session_state.responses_todo) > 0: 
+                time.sleep(.5)
+                js = '''
+                    <script>
+                        var body = window.parent.document.querySelector(".main");
+                        console.log(body);
+                        body.scrollTop = 0;
+                    </script>
+                    '''
+                st.components.v1.html(js)
                 st.session_state.page = 3 # Repeat page
                 st.rerun()
             # otherwise
