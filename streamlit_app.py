@@ -81,10 +81,6 @@ def dispatch_batch():
 
     st.session_state.responses_todo = batch_data
     st.session_state.total_responses = len(batch_data)
-    
-    if len(batch_data) == 0:
-        st.markdown("#### You have completed your coarse annotations. Please move on to the fine annotations. Thank you!")
-        
 
 def identifiers_page1():
     st.header("Enter your Annotator ID to start the survey.")
@@ -101,7 +97,10 @@ def identifiers_page1():
             st.session_state.annotator_id = annotator_id
             st.write("Loading your annotations...")
             dispatch_batch()
-            st.session_state.page = 2
+            if st.session_state.total_responses > 0:
+                st.session_state.page = 2
+            else:
+                st.markdown("#### You have completed your coarse annotations. Please move on to the fine annotations. Thank you!")
             st.rerun()
         else:
             st.write(":orange[Please enter your Annotator ID.]")
