@@ -119,6 +119,7 @@ def identifiers_page1():
 def instructions_page2():
     
     st.header("Instructions")
+    st.markdown(st.session_state.annotator_id)
     
     with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
             survey_instructions = file.read()
