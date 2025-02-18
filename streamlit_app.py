@@ -190,15 +190,15 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    st.divider()
-    col1, col2 = st.columns([1,2])
-    with col1:
-        st.markdown('#### How confident do you feel about your annotation?')
-    with col2:
-        confidence = st.radio("How confident do you feel about your annotation?",
-                            options=st.session_state.confidence_likert.keys(),
-                            horizontal=True, index=likert2index(f'conf_{annotation_id}'),
-                            label_visibility='hidden', key=f'cnf_{annotation_id}')
+    # st.divider()
+    # col1, col2 = st.columns([1,2])
+    # with col1:
+    #     st.markdown('#### How confident do you feel about your annotation?')
+    # with col2:
+    #     confidence = st.radio("How confident do you feel about your annotation?",
+    #                         options=st.session_state.confidence_likert.keys(),
+    #                         horizontal=True, index=likert2index(f'conf_{annotation_id}'),
+    #                         label_visibility='hidden', key=f'cnf_{annotation_id}')
 
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
