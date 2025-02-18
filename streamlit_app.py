@@ -29,11 +29,8 @@ if 'times' not in st.session_state:
     st.session_state.times = {}
 
 if 'main_likert' not in st.session_state:
-    st.session_state.main_likert = {"Disagree": 0,
-                                    "Partially Disagree": 1,
-                                    "Neutral": 2,
-                                    "Partially Agree": 3,
-                                    "Agree": 4}
+    st.session_state.main_likert = json.load(open(os.path.join(f"main_likert.json"), 'r', encoding='utf-8'))
+    
 if 'conf_likert' not in st.session_state:
     st.session_state.confidence_likert = {"Not confident": 0,
                                           "Slightly confident": 1,
@@ -92,8 +89,7 @@ def identifiers_page1():
                 [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
                 and that you consent to participate in the study.**''')
 
-    with open(os.path.join(f"animals.json"), 'r', encoding='utf-8') as json_file:
-        animals = json.load(json_file)
+    animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
 
     annotator_id = st.text_input("Annotator ID:")
     
