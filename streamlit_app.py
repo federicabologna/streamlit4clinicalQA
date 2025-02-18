@@ -238,6 +238,7 @@ def questions_page3():
                 st.rerun()
         else:
             st.markdown(":orange[**Please answer all the questions.**]")
+time.sleep(.5)
 js = '''
     <script>
         var body = window.parent.document.querySelector(".main");
