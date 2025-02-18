@@ -165,8 +165,8 @@ def questions_page3():
         
         st.header("Answer")
         st.markdown(annotation_d['answer'])
-        st.divider()
-        st.markdown('##### Feel free to consult [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
+        # st.divider()
+        # st.markdown('##### Feel free to consult [the annotation instructions here](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing).')
     
     with col2:
         if annotation_type == 'coarse':
