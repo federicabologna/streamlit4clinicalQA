@@ -77,7 +77,7 @@ def dispatch_batch():
     #if len(st.session_state.responses_todo) == 0:
     annotation_type = st.session_state.annotation_type = 'coarse'
     annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
-    batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(n_annotations)] # check if any coarse annotations left
+    batch_data = [i for i in annotations_collection.find({"rated": "No"}).sort("_id", pymongo.ASCENDING).limit(n_annotations)] # check if any coarse annotations left
 
     st.session_state.responses_todo = batch_data
     st.session_state.total_responses = len(batch_data)
@@ -129,9 +129,7 @@ def questions_page3():
     time.sleep(.5)
     js = '''
         <script>
-            var body = window.parent.document.querySelector(".main");
-            console.log(body);
-            body.scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         </script>
         '''
     st.components.v1.html(js, height=0)
