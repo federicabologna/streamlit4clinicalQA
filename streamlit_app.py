@@ -149,14 +149,6 @@ def questions_page3():
     
     col1, col2 = st.columns(2)
     with col1:
-        js = '''
-        <script>
-            var body = window.parent.document.querySelector(".main");
-            console.log(body);
-            body.scrollTop = 0;
-        </script>
-        '''
-        st.components.v1.html(js)
         st.header("Question")
         st.markdown(annotation_d['question'])
         
@@ -246,6 +238,15 @@ def questions_page3():
                 st.rerun()
         else:
             st.markdown(":orange[**Please answer all the questions.**]")
+js = '''
+    <script>
+        var body = window.parent.document.querySelector(".main");
+        console.log(body);
+        body.scrollTop = 0;
+    </script>
+    '''
+st.components.v1.html(js)
+
 
 def followup_page4():
     st.markdown('#### Final question before you go...')
