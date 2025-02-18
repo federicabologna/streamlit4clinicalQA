@@ -99,8 +99,7 @@ def identifiers_page1():
     password = st.text_input("Password:")
 
     leftleft, left, middle, right, rightright = st.columns(5)
-    if (right.button("Next :arrow_forward:", use_container_width=True) and password == animals[str(annotator_id)]) 
-        or (annotator_id) and password == animals[str(annotator_id)]:
+    if (right.button("Next :arrow_forward:", use_container_width=True) and password == animals[str(annotator_id)])  or (annotator_id) and password == animals[str(annotator_id)]:
         if annotator_id :
             st.session_state.annotator_id = annotator_id
             st.write("Loading your annotations...")
