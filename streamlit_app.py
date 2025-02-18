@@ -136,23 +136,15 @@ def instructions_page2():
 
 def questions_page3():
     
-    # time.sleep(.5)
-    # js = '''
-    #     <script>
-    #         var body = window.parent.document.querySelector(".main");
-    #         console.log(body);
-    #         body.scrollTop = 0;
-    #     </script>
-    #     '''
-    # st.components.v1.html(js, height=0)
-    st.markdown(
-        """
-        <script>
+    time.sleep(.5)
+    scroll_js = """
+    <script>
+        window.onload = function() {
             window.scrollTo(0, 0);
-        </script>
-        """,
-        unsafe_allow_html=True
-    )
+        }
+    </script>
+    """
+    st.components.v1.html(scroll_js, height=0)
     
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
