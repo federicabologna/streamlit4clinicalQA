@@ -136,16 +136,6 @@ def instructions_page2():
 
 def questions_page3():
     
-    time.sleep(.5)
-    scroll_js = """
-    <script>
-        window.onload = function() {
-            window.scrollTo(0, 0);
-        }
-    </script>
-    """
-    st.components.v1.html(scroll_js, height=0)
-    
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
@@ -209,6 +199,17 @@ def questions_page3():
             previous_annotation_d = st.session_state.responses_done.pop() 
             st.session_state.responses_todo.insert(0,previous_annotation_d)
         st.rerun()
+    
+    elif middle.button(":arrow_up: Scroll to Top", use_container_width=True):
+        time.sleep(.5)
+        js = '''
+        <script>
+            var body = window.parent.document.querySelector(".main");
+            console.log(body);
+            body.scrollTop = 0;
+        </script>
+        '''
+        st.components.v1.html(js, height=0)
 
     elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
     
