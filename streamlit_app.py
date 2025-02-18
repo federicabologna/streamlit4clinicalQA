@@ -74,25 +74,25 @@ def dispatch_batch():
     annotator_id = st.session_state.annotator_id
     n_annotations = st.session_state.batch_size
 
-    if len(st.session_state.responses_todo) == 0:
-        annotation_type = st.session_state.annotation_type = 'coarse'
+    #if len(st.session_state.responses_todo) == 0:
+    annotation_type = st.session_state.annotation_type = 'coarse'
+    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
+    batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(n_annotations)] # check if any coarse annotations left
+
+    if len(batch_data) == 0:
+        annotation_type = st.session_state.annotation_type = 'fine'
         annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
-        batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(n_annotations)] # check if any coarse annotations left
+        
+        batch_ids = set()
+        for i in annotations_collection.find({"rated": "No"}):
+            batch_ids.add(i.get('question_id'))
 
-        if len(batch_data) == 0:
-            annotation_type = st.session_state.annotation_type = 'fine'
-            annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
-            
-            batch_ids = set()
-            for i in annotations_collection.find({"rated": "No"}):
-                batch_ids.add(i.get('question_id'))
+        batch_data = []
+        for i in list(batch_ids)[:3]:
+            batch_data.extend([i for i in annotations_collection.find({"question_id":i})])
 
-            batch_data = []
-            for i in list(batch_ids)[:3]:
-                batch_data.extend([i for i in annotations_collection.find({"question_id":i})])
-
-        st.session_state.responses_todo = batch_data
-        st.session_state.total_responses = len(batch_data)
+    st.session_state.responses_todo = batch_data
+    st.session_state.total_responses = len(batch_data)
         
 
 def identifiers_page1():
