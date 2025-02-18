@@ -13,7 +13,7 @@ st.markdown(
     <style>
         #scroll-top-btn {
             position: fixed;
-            bottom: 20px;
+            top: 20px;
             right: 20px;
             padding: 10px 20px;
             background-color: #007BFF;
