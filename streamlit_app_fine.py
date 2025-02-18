@@ -79,10 +79,20 @@ def dispatch_batch():
     annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
     batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(n_annotations)] # check if any coarse annotations left
 
+    if len(batch_data) == 0:
+        annotation_type = st.session_state.annotation_type = 'fine'
+        annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
+        
+        batch_ids = set()
+        for i in annotations_collection.find({"rated": "No"}):
+            batch_ids.add(i.get('question_id'))
+
+        batch_data = []
+        for i in list(batch_ids)[:3]:
+            batch_data.extend([i for i in annotations_collection.find({"question_id":i})])
+
     st.session_state.responses_todo = batch_data
     st.session_state.total_responses = len(batch_data)
-    
-    if len(batch_data) == 0:
         
 
 def identifiers_page1():
@@ -137,13 +147,17 @@ def questions_page3():
         '''
     st.components.v1.html(js, height=0)
     
-    st.markdown([d['question_id'] for d in st.session_state.responses_todo])
+    st.markdown([(d['question_id'], d['sentence_id']) for d in st.session_state.responses_todo])
     
     annotation_d = st.session_state.responses_todo[0]
-    annotation_type == 'coarse'
+    annotation_type = annotation_d['annotation_type']
     annotations_collection = st.session_state.annotation_collection
     
-    annotation_id = annotation_d['answer_id']
+    if annotation_type == 'coarse':
+        annotation_id = annotation_d['answer_id']
+    elif annotation_type == 'fine':
+        annotation_id = annotation_d['sentence_id']
+    
     if annotation_id not in st.session_state.times.keys():
         st.session_state.times[annotation_id] = {'start': time.time()}
     
@@ -155,10 +169,13 @@ def questions_page3():
         st.header("Answer")
         st.markdown(annotation_d['answer'])
         
-        st.markdown('#### Feel free to consult the [:clipboard: Annotation instructions](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing)')
+        st.markdown('#### [:clipboard: Annotation instructions](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing)')
 
     with col2:
-        st.subheader("The information provided in the answer:")
+        if annotation_type == 'coarse':
+            st.subheader("The information provided in the answer:")
+        elif annotation_type == 'fine':
+            st.subheader("The information provided in the highlighted sentence:")
         likert_options = st.session_state.main_likert.keys()
         
         st.markdown('#### :green[aligns with current medical knowledge]')
@@ -207,13 +224,22 @@ def questions_page3():
                 st.session_state.times[annotation_id]['end'] = time.time()
             elapsed_time = st.session_state.times[annotation_id]['end'] - st.session_state.times[annotation_id]['start']
             
-            update_status = annotations_collection.update_one({"answer_id": annotation_id},  # Find the document with _id = 1
-                                                            {"$set": {"rated": "Yes",
-                                                                        "correctness": correctness,
-                                                                        "relevance": relevance,
-                                                                        "safety": safety,
-                                                                        "time": elapsed_time,
-                                                                        "confidence": confidence}})  # Update: change rated to yes
+            if annotation_type == 'coarse':
+                update_status = annotations_collection.update_one({"answer_id": annotation_id},  # Find the document with _id = 1
+                                                                {"$set": {"rated": "Yes",
+                                                                          "correctness": correctness,
+                                                                          "relevance": relevance,
+                                                                          "safety": safety,
+                                                                          "time": elapsed_time,
+                                                                          "confidence": confidence}})  # Update: change rated to yes
+            elif annotation_type == 'fine':
+                update_status = annotations_collection.update_one({"sentence_id": annotation_id},  # Find the document with _id = 1
+                                                                {"$set": {"rated": "Yes",
+                                                                          "correctness": correctness,
+                                                                          "relevance": relevance,
+                                                                          "safety": safety,
+                                                                          "time": elapsed_time,
+                                                                          "confidence": confidence}})
  
             # if annotation done is less then total number per batch
             if len(st.session_state.responses_todo) > 0:
