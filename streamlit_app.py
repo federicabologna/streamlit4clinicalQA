@@ -88,7 +88,7 @@ def identifiers_page1():
     
     valid = st.session_state.valid_batch_ids
     batch_number = st.text_input("Batch ID:")
-    if batch_number and batch_number not in valid:
+    if batch_number and int(batch_number) not in valid:
         st.write(":orange[Invalid Batch ID]")
         
     leftleft, left, middle, right, rightright = st.columns(5)
