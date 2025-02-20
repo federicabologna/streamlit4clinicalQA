@@ -92,7 +92,7 @@ def identifiers_page1():
         st.write(":orange[Invalid Batch #]")
         
     leftleft, left, middle, right, rightright = st.columns(5)
-    if  right.button("Next :arrow_forward:", use_container_width=True or annotator_n) and password == animals[str(annotator_n)] and batch_number in valid:
+    if  (right.button("Next :arrow_forward:", use_container_width=True and password == animals[str(annotator_n)] and batch_number in valid) or (annotator_n and password == animals[str(annotator_n)] and batch_number in valid)):
         if annotator_n:
             st.session_state.annotator_n = annotator_n
             st.session_state.batch_n = batch_number
