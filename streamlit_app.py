@@ -83,12 +83,12 @@ def identifiers_page1():
     
     animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
     password = st.text_input("Password:")
-    if password != animals[str(annotator_id)]:
+    if password and password != animals[str(annotator_id)]:
         st.write(":orange[Incorrect Password]")
     
     valid = st.session_state.valid_batch_ids
     batch_number = st.text_input("Batch ID:")
-    if batch_number not in valid:
+    if batch_number and batch_number not in valid:
         st.write(":orange[Invalid Batch ID]")
         
     leftleft, left, middle, right, rightright = st.columns(5)
