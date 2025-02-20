@@ -79,11 +79,13 @@ def identifiers_page1():
                 [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
                 and that you consent to participate in the study.**''')
     
-    annotator_n = st.text_input("Annotator #:")   
+    annotator_n = st.text_input("Annotator #:")
+    if annotator_n < 0 and annotator_n > 6:
+        st.write(":orange[Invalid Annotator #]")
     
     animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
     password = st.text_input("Password:")
-    if password and password != animals[str(annotator_n)]:
+    if annotator_n and password and password != animals[str(annotator_n)]:
         st.write(":orange[Incorrect Password]")
     
     valid = st.session_state.valid_batch_ns
@@ -92,20 +94,21 @@ def identifiers_page1():
         st.write(":orange[Invalid Batch #]")
         
     leftleft, left, middle, right, rightright = st.columns(5)
-    if annotator_n and password and batch_number:
-        if  (right.button("Next :arrow_forward:", use_container_width=True and password == animals[str(annotator_n)] and batch_number in valid) or (annotator_n and password == animals[str(annotator_n)] and batch_number in valid)):
-            if annotator_n:
-                st.session_state.annotator_n = annotator_n
-                st.session_state.batch_n = batch_number
-                st.write("Loading your annotations...")
-                dispatch_batch()
-                if st.session_state.total_responses > 0:
-                    st.session_state.page = 2
-                else:
-                    st.session_state.page = 6
-                st.rerun()
+    cond1 = (right.button("Next :arrow_forward:", use_container_width=True) and annotator_n and password and batch_number and password == animals[str(annotator_n)] and batch_number in valid)
+    cond2 = (annotator_n and password and batch_number and password == animals[str(annotator_n)] and batch_number in valid)
+    if  cond1 or cond2:
+        if annotator_n:
+            st.session_state.annotator_n = annotator_n
+            st.session_state.batch_n = batch_number
+            st.write("Loading your annotations...")
+            dispatch_batch()
+            if st.session_state.total_responses > 0:
+                st.session_state.page = 2
             else:
-                st.write(":orange[Please enter the requested information.]")
+                st.session_state.page = 6
+            st.rerun()
+    else:
+        st.write(":orange[Please enter the requested information.]")
 
 
 def instructions_page2():
