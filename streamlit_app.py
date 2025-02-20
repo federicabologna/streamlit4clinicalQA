@@ -13,12 +13,12 @@ st.set_page_config(layout="wide", page_title="Clinical QA - Coarse Annotations")
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 1
+if 'annotator_n' not in st.session_state:
+    st.session_state.annotator_n = None
 if 'batch_n' not in st.session_state:
     st.session_state.batch_n = None
 if 'valid_batch_ns' not in st.session_state:
     st.session_state.valid_batch_ns = ['0']
-if 'annotator_n' not in st.session_state:
-    st.session_state.annotator_n = None
 if 'annotation_id' not in st.session_state:
     st.session_state.annotation_id = None
 if 'responses_todo' not in st.session_state:
@@ -67,11 +67,11 @@ def dispatch_batch():
     batch_n = st.session_state.batch_n
 
     annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_coarse']
-    batch_data = [i for i in annotations_collection.find({ "$and": [{ "rated": "No"},
+    st.session_state.responses_todo = [i for i in annotations_collection.find({ "$and": [{ "rated": "No"},
                                                                     { "batch_id": f'batch_{batch_n}'}]})] # check if any coarse annotations left
 
-    st.session_state.responses_todo = batch_data
-    st.session_state.total_responses = len(batch_data)
+    st.session_state.responses_done = [i for i in annotations_collection.find({ "$and": [{ "rated": "Yes"},
+                                                                    { "batch_id": f'batch_{batch_n}'}]})]
 
 
 def identifiers_page1():
@@ -293,7 +293,7 @@ elif st.session_state.page == 6:
 
 
 if len(st.session_state.responses_done) > 0:
-    current_progress = int(len(st.session_state.responses_done)/st.session_state.total_responses*100)
+    current_progress = int(len(st.session_state.responses_done)/len(st.session_state.responses_todo)*100)
     st.progress(current_progress)
     st.write(f"{current_progress}%")
 else:
