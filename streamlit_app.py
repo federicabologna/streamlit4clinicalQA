@@ -102,8 +102,8 @@ def identifiers_page1():
         else:
             st.session_state.page = 6
         st.rerun()
-        else:
-            st.write(":orange[Please enter your Annotator ID.]")
+    else:
+        st.write(":orange[Please enter your Annotator ID.]")
 
 
 def instructions_page2():
