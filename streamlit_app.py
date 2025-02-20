@@ -114,7 +114,7 @@ def identifiers_page1():
             st.session_state.batch_n = batch_number
             st.write("Loading your annotations...")
             dispatch_batch()
-            if st.session_state.total_responses > 0:
+            if len(st.session_state.responses_todo) > 0:
                 st.session_state.page = 2
             else:
                 st.session_state.page = 6
