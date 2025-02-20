@@ -67,11 +67,12 @@ def dispatch_batch():
     batch_n = st.session_state.batch_n
 
     annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_coarse']
-    batch_data = [i for i in annotations_collection.find({ "$and": [{ "rated": { "No" }},
+    batch_data = [i for i in annotations_collection.find({ "$and": [{ "rated": "No"},
                                                                     { "batch_id": f'batch_{batch_n}'}]})] # check if any coarse annotations left
 
     st.session_state.responses_todo = batch_data
     st.session_state.total_responses = len(batch_data)
+
 
 def identifiers_page1():
     st.header("Enter your Annotator #, Password, and Batch # to start the survey.")
