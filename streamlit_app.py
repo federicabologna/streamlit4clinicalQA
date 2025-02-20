@@ -26,7 +26,7 @@ if 'responses_todo' not in st.session_state:
 if 'responses_done' not in st.session_state:
     st.session_state.responses_done = []
 if 'n_responses_done' not in st.session_state:
-    st.session_state.n_responses_done = None
+    st.session_state.n_responses_done = 0
 if 'times' not in st.session_state:
     st.session_state.times = {}
 
