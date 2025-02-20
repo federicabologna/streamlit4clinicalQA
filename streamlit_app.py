@@ -25,8 +25,6 @@ if 'responses_todo' not in st.session_state:
     st.session_state.responses_todo = []
 if 'responses_done' not in st.session_state:
     st.session_state.responses_done = []
-if 'n_responses_done' not in st.session_state:
-    st.session_state.n_responses_done = 0
 if 'times' not in st.session_state:
     st.session_state.times = {}
 
@@ -71,9 +69,6 @@ def dispatch_batch():
     annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_coarse']
     st.session_state.responses_todo = [i for i in annotations_collection.find({ "$and": [{ "rated": "No"},
                                                                     { "batch_id": f'batch_{batch_n}'}]})] # check if any coarse annotations left
-
-    st.session_state.n_responses_done = len([i for i in annotations_collection.find({ "$and": [{ "rated": "Yes"},
-                                                                    { "batch_id": f'batch_{batch_n}'}]})])
 
 
 def identifiers_page1():
@@ -294,8 +289,8 @@ elif st.session_state.page == 6:
     coarse_end_page6()
 
 
-if st.session_state.n_responses_done > 0:
-    current_progress = round(st.session_state.n_responses_done/9*100)
+if len(st.session_state.responses_done) > 0:
+    current_progress = int(len(st.session_state.responses_done)/9*100)
     st.progress(current_progress)
     st.write(f"{current_progress}%")
 else:
