@@ -85,7 +85,10 @@ def identifiers_page1():
     * Annotator #4: elephant
     * Annotator #5: flamingo
     * Annotator #6: dolphin
-    Valid Batch #: 0''')
+    Valid Batch #: 0
+    
+    If you receive the message: "You have completed all your coarse annotation" all coarse annotations in that annotator # package have been done. Please test a different annotator #
+    If you finish a batch you should see the message: You have completed the batch.''')
     
     annotator_n = st.text_input("Annotator #:")
     if annotator_n:
