@@ -80,6 +80,17 @@ def identifiers_page1():
                 [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
                 and that you consent to participate in the study.**''')
     
+    st.markdown('''### Instructions for testers:
+                Valid Annotator #: 2, 3, 4, 5, 6
+                Passwords:
+                * Annotator #2: tiger
+                * Annotator #3: panda
+                * Annotator #4: elephant
+                * Annotator #5: flamingo
+                * Annotator #6: dolphin
+                Valid Batch #: 0
+                ''')
+    
     annotator_n = st.text_input("Annotator #:")
     if annotator_n:
         if int(annotator_n) < 0 and int(annotator_n) > 6:
@@ -141,7 +152,7 @@ def questions_page3():
         '''
     st.components.v1.html(js, height=0)
     
-    # st.markdown([d['question_id'] for d in st.session_state.responses_todo])
+    st.markdown([d['question_id'] for d in st.session_state.responses_todo])
     
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = 'coarse'
