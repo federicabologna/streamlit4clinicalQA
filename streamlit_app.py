@@ -81,15 +81,14 @@ def identifiers_page1():
                 and that you consent to participate in the study.**''')
     
     st.markdown('''### Instructions for testers:
-                Valid Annotator #: 2, 3, 4, 5, 6
-                Passwords:
-                * Annotator #2: tiger
-                * Annotator #3: panda
-                * Annotator #4: elephant
-                * Annotator #5: flamingo
-                * Annotator #6: dolphin
-                Valid Batch #: 0
-                ''')
+    Valid Annotator #: 2, 3, 4, 5, 6
+    Passwords:
+    * Annotator #2: tiger
+    * Annotator #3: panda
+    * Annotator #4: elephant
+    * Annotator #5: flamingo
+    * Annotator #6: dolphin
+    Valid Batch #: 0''')
     
     annotator_n = st.text_input("Annotator #:")
     if annotator_n:
