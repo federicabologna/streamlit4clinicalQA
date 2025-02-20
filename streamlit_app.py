@@ -69,7 +69,7 @@ def dispatch_batch():
     annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_coarse']
     st.session_state.responses_todo = [i for i in annotations_collection.find({ "$and": [{ "rated": "No"},
                                                                     { "batch_id": f'batch_{batch_n}'}]})] # check if any coarse annotations left
-
+    st.session_state.responses_left = len(st.session_state.responses_todo)
 
 def identifiers_page1():
     st.header("Enter your Annotator #, Password, and Batch # to start the survey.")
@@ -226,7 +226,7 @@ def questions_page3():
                                                                         "time": elapsed_time,
                                                                         "confidence": confidence}})  # Update: change rated to yes
  
-            # if annotation done is less then total number per batch
+            # if annotation to do is more than 0
             if len(st.session_state.responses_todo) > 0:
                 st.session_state.page = 3 # Repeat page
                 st.rerun()
@@ -290,7 +290,7 @@ elif st.session_state.page == 6:
 
 
 if len(st.session_state.responses_done) > 0:
-    current_progress = int(len(st.session_state.responses_done)/9*100)
+    current_progress = int(len(st.session_state.responses_done)/st.session_state.responses_left*100)
     st.progress(current_progress)
     st.write(f"{current_progress}%")
 else:
