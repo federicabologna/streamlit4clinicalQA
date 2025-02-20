@@ -8,15 +8,15 @@ from pymongo.mongo_client import MongoClient
 
 
 # Set page configuration
-st.set_page_config(layout="wide", page_title="Clinical QA Annotation")
+st.set_page_config(layout="wide", page_title="Clinical QA - Coarse Annotations")
 
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 1
 if 'batch_id' not in st.session_state:
     st.session_state.batch_id = None
-if 'batch_size' not in st.session_state:
-    st.session_state.batch_size = 9
+if 'valid_batch_ids' not in st.session_state:
+    st.session_state.valid_batch_ids = [0]
 if 'annotator_id' not in st.session_state:
     st.session_state.annotator_id = None
 if 'annotation_id' not in st.session_state:
@@ -30,19 +30,10 @@ if 'times' not in st.session_state:
 
 if 'main_likert' not in st.session_state:
     st.session_state.main_likert = json.load(open(os.path.join(f"main_likert.json"), 'r', encoding='utf-8'))
-    
 if 'conf_likert' not in st.session_state:
-    st.session_state.confidence_likert = {"Not confident": 0,
-                                          "Slightly confident": 1,
-                                          "Somewhat confident": 2,
-                                          "Fairly confident": 3,
-                                          "Very confident": 4}
+    st.session_state.confidence_likert = json.load(open(os.path.join(f"conf_likert.json"), 'r', encoding='utf-8'))
 if 'ease_likert' not in st.session_state:
-    st.session_state.ease_likert = {"Very difficult": 0,
-                                    "Somewhat difficult": 1,
-                                    "Neither difficult nor easy": 2,
-                                    "Somewhat easy": 3,
-                                    "Very easy": 4}
+    st.session_state.ease_likert = json.load(open(os.path.join(f"ease_likert.json"), 'r', encoding='utf-8'))
 
 def assign_states(key, corr, rel, saf, conf):
     st.session_state[f'corr_{key}'] = corr
@@ -71,33 +62,38 @@ def dispatch_batch():
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
-    db = client['annotations']  # database
+    db = client['batches']  # database
     annotator_id = st.session_state.annotator_id
-    n_annotations = st.session_state.batch_size
+    batch_id = st.session_state.batch_id
 
-    #if len(st.session_state.responses_todo) == 0:
-    annotation_type = st.session_state.annotation_type = 'coarse'
-    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
-    batch_data = [i for i in annotations_collection.find({"rated": "No"}).sort("_id", pymongo.ASCENDING).limit(n_annotations)] # check if any coarse annotations left
+    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_coarse']
+    batch_data = [i for i in annotations_collection.find({ "$and": [{ "rated": { "No" }},
+                                                                    { "batch_id": batch_id}]})] # check if any coarse annotations left
 
     st.session_state.responses_todo = batch_data
     st.session_state.total_responses = len(batch_data)
 
 def identifiers_page1():
-    st.header("Enter your Annotator ID to start the survey.")
-    st.markdown('''**By entering your Annotator ID you confirm that you have read
+    st.header("Enter your Annotator ID, Password, and Batch ID to start the survey.")
+    st.markdown('''**By entering your identifiers you confirm that you have read
                 [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
                 and that you consent to participate in the study.**''')
-
-    animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
-
+    
     annotator_id = st.text_input("Annotator ID:")
     
+    animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
     password = st.text_input("Password:")
-
+    if password != animals[str(annotator_id)]:
+        st.write(":orange[Incorrect Password]")
+    
+    valid = st.session_state.valid_batch_ids
+    batch_number = st.text_input("Batch ID:")
+    if batch_number not in valid:
+        st.write(":orange[Invalid Batch ID]")
+        
     leftleft, left, middle, right, rightright = st.columns(5)
-    if (right.button("Next :arrow_forward:", use_container_width=True) and password == animals[str(annotator_id)])  or (annotator_id) and password == animals[str(annotator_id)]:
-        if annotator_id :
+    if  right.button("Next :arrow_forward:", use_container_width=True or annotator_id) and password == animals[str(annotator_id)] and batch_id in valid):
+        if annotator_id:
             st.session_state.annotator_id = annotator_id
             st.write("Loading your annotations...")
             dispatch_batch()
@@ -108,7 +104,7 @@ def identifiers_page1():
             st.rerun()
         else:
             st.write(":orange[Please enter your Annotator ID.]")
-            
+
 
 def instructions_page2():
     
@@ -178,7 +174,6 @@ def questions_page3():
     st.divider()
     st.markdown('#### Feel free to consult the [:clipboard: Annotation instructions](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing)')
     st.divider()
-    
     col1, col2 = st.columns([1,2])
     with col1:
         st.markdown('#### How confident do you feel about your annotation?')
