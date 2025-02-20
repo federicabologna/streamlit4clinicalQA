@@ -81,7 +81,7 @@ def identifiers_page1():
     
     annotator_n = st.text_input("Annotator #:")
     if annotator_n:
-        if annotator_n < 0 and annotator_n > 6:
+        if int(annotator_n) < 0 and int(annotator_n) > 6:
             st.write(":orange[Invalid Annotator #]")
     
     animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
