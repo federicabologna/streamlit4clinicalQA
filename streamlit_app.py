@@ -295,7 +295,7 @@ elif st.session_state.page == 6:
 
 
 if st.session_state.n_responses_done > 0:
-    current_progress = st.session_state.n_responses_done/9*100
+    current_progress = round(st.session_state.n_responses_done/9*100)
     st.progress(current_progress)
     st.write(f"{current_progress}%")
 else:
