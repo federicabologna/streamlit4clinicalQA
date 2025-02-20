@@ -13,12 +13,12 @@ st.set_page_config(layout="wide", page_title="Clinical QA - Coarse Annotations")
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 1
-if 'batch_id' not in st.session_state:
-    st.session_state.batch_id = None
-if 'valid_batch_ids' not in st.session_state:
-    st.session_state.valid_batch_ids = [0]
-if 'annotator_id' not in st.session_state:
-    st.session_state.annotator_id = None
+if 'batch_n' not in st.session_state:
+    st.session_state.batch_n = None
+if 'valid_batch_ns' not in st.session_state:
+    st.session_state.valid_batch_ns = ['0']
+if 'annotator_n' not in st.session_state:
+    st.session_state.annotator_n = None
 if 'annotation_id' not in st.session_state:
     st.session_state.annotation_id = None
 if 'responses_todo' not in st.session_state:
@@ -63,47 +63,48 @@ def dispatch_batch():
     # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['batches']  # database
-    annotator_id = st.session_state.annotator_id
-    batch_id = st.session_state.batch_id
+    annotator_n = st.session_state.annotator_n
+    batch_n = st.session_state.batch_n
 
-    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_coarse']
+    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_coarse']
     batch_data = [i for i in annotations_collection.find({ "$and": [{ "rated": { "No" }},
-                                                                    { "batch_id": batch_id}]})] # check if any coarse annotations left
+                                                                    { "batch_id": f'batch_{batch_n}'}]})] # check if any coarse annotations left
 
     st.session_state.responses_todo = batch_data
     st.session_state.total_responses = len(batch_data)
 
 def identifiers_page1():
-    st.header("Enter your Annotator ID, Password, and Batch ID to start the survey.")
+    st.header("Enter your Annotator #, Password, and Batch # to start the survey.")
     st.markdown('''**By entering your identifiers you confirm that you have read
                 [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
                 and that you consent to participate in the study.**''')
     
-    annotator_id = st.text_input("Annotator ID:")
+    annotator_n = st.text_input("Annotator #:")   
     
     animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
     password = st.text_input("Password:")
-    if password and password != animals[str(annotator_id)]:
+    if password and password != animals[str(annotator_n)]:
         st.write(":orange[Incorrect Password]")
     
-    valid = st.session_state.valid_batch_ids
-    batch_number = st.text_input("Batch ID:")
-    if batch_number and int(batch_number) not in valid:
-        st.write(":orange[Invalid Batch ID]")
+    valid = st.session_state.valid_batch_ns
+    batch_number = st.text_input("Batch #:")
+    if batch_number and batch_number not in valid:
+        st.write(":orange[Invalid Batch #]")
         
     leftleft, left, middle, right, rightright = st.columns(5)
-    if  right.button("Next :arrow_forward:", use_container_width=True or annotator_id) and password == animals[str(annotator_id)] and int(batch_number) in valid:
-        st.session_state.annotator_id = annotator_id
-        st.session_state.batch_id = int(batch_number)
-        st.write("Loading your annotations...")
-        dispatch_batch()
-        if st.session_state.total_responses > 0:
-            st.session_state.page = 2
+    if  right.button("Next :arrow_forward:", use_container_width=True or annotator_n) and password == animals[str(annotator_n)] and batch_number in valid:
+        if annotator_n:
+            st.session_state.annotator_n = annotator_n
+            st.session_state.batch_n = batch_number
+            st.write("Loading your annotations...")
+            dispatch_batch()
+            if st.session_state.total_responses > 0:
+                st.session_state.page = 2
+            else:
+                st.session_state.page = 6
+            st.rerun()
         else:
-            st.session_state.page = 6
-        st.rerun()
-    else:
-        st.write(":orange[Please enter your Annotator ID.]")
+            st.write(":orange[Please enter your Annotator #.]")
 
 
 def instructions_page2():
@@ -245,7 +246,7 @@ def followup_page4():
         st.rerun()
 
     elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
-        collection = db[f'annotator{st.session_state.annotator_id}'].insert_one({'batch': [(d['question_id'], d['answer_id']) for d in st.session_state.responses_done],
+        collection = db[f'annotator{st.session_state.annotator_n}'].insert_one({'batch': [(d['question_id'], d['answer_id']) for d in st.session_state.responses_done],
                                                                'datetime': datetime.now(),
                                                                'ease': ease})
         st.session_state.page = 5
