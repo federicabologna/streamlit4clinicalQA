@@ -104,8 +104,8 @@ def identifiers_page1():
                 else:
                     st.session_state.page = 6
                 st.rerun()
-    else:
-        st.write(":orange[Please enter the requested information.]")
+            else:
+                st.write(":orange[Please enter the requested information.]")
 
 
 def instructions_page2():
