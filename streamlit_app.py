@@ -87,12 +87,12 @@ def identifiers_page1():
         st.write(":orange[Incorrect Password]")
     
     valid = st.session_state.valid_batch_ids
-    batch_number = st.text_input("Batch ID:")
-    if batch_number and int(batch_number) not in valid:
+    batch_number = int(st.text_input("Batch ID:"))
+    if batch_number and batch_number not in valid:
         st.write(":orange[Invalid Batch ID]")
         
     leftleft, left, middle, right, rightright = st.columns(5)
-    if  right.button("Next :arrow_forward:", use_container_width=True or annotator_id) and password == animals[str(annotator_id)] and int(batch_number) in valid:
+    if  right.button("Next :arrow_forward:", use_container_width=True or annotator_id) and password == animals[str(annotator_id)] and batch_number in valid:
         if annotator_id:
             st.session_state.annotator_id = annotator_id
             st.write("Loading your annotations...")
