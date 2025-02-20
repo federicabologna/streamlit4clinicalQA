@@ -92,19 +92,20 @@ def identifiers_page1():
         st.write(":orange[Invalid Batch #]")
         
     leftleft, left, middle, right, rightright = st.columns(5)
-    if  (right.button("Next :arrow_forward:", use_container_width=True and password == animals[str(annotator_n)] and batch_number in valid) or (annotator_n and password == animals[str(annotator_n)] and batch_number in valid)):
-        if annotator_n:
-            st.session_state.annotator_n = annotator_n
-            st.session_state.batch_n = batch_number
-            st.write("Loading your annotations...")
-            dispatch_batch()
-            if st.session_state.total_responses > 0:
-                st.session_state.page = 2
+    if annotator_n and password and batch_number:
+        if  (right.button("Next :arrow_forward:", use_container_width=True and password == animals[str(annotator_n)] and batch_number in valid) or (annotator_n and password == animals[str(annotator_n)] and batch_number in valid)):
+            if annotator_n:
+                st.session_state.annotator_n = annotator_n
+                st.session_state.batch_n = batch_number
+                st.write("Loading your annotations...")
+                dispatch_batch()
+                if st.session_state.total_responses > 0:
+                    st.session_state.page = 2
+                else:
+                    st.session_state.page = 6
+                st.rerun()
             else:
-                st.session_state.page = 6
-            st.rerun()
-        else:
-            st.write(":orange[Please enter your Annotator #.]")
+                st.write(":orange[Please enter your Annotator #.]")
 
 
 def instructions_page2():
