@@ -80,8 +80,9 @@ def identifiers_page1():
                 and that you consent to participate in the study.**''')
     
     annotator_n = st.text_input("Annotator #:")
-    if annotator_n < 0 and annotator_n > 6:
-        st.write(":orange[Invalid Annotator #]")
+    if annotator:
+        if annotator_n < 0 and annotator_n > 6:
+            st.write(":orange[Invalid Annotator #]")
     
     animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
     password = st.text_input("Password:")
