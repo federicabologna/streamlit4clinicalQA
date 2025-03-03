@@ -188,8 +188,10 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    st.divider()
-    st.markdown('#### Feel free to consult the [:clipboard: Annotation instructions](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing)')
+    with st.expander('#### See Annotation Instructions'):
+        with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
+            survey_instructions = file.read()
+        st.markdown(survey_instructions, unsafe_allow_html=True)
     st.divider()
     col1, col2 = st.columns([1,2])
     with col1:
