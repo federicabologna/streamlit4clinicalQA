@@ -188,7 +188,7 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    with st.expander('#### See Annotation Instructions'):
+    with st.expander(':clipboard: *See Annotation Instructions*'):
         with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
             survey_instructions = file.read()
         st.markdown(survey_instructions, unsafe_allow_html=True)
