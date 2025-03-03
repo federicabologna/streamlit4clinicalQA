@@ -151,7 +151,7 @@ def questions_page3():
         '''
     st.components.v1.html(js, height=0)
     
-    st.markdown([d['question_id'] for d in st.session_state.responses_todo])
+    # st.markdown([d['question_id'] for d in st.session_state.responses_todo])
     
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = 'coarse'
