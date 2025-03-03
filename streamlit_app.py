@@ -192,7 +192,7 @@ def questions_page3():
         with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
             survey_instructions = file.read()
         st.markdown(survey_instructions, unsafe_allow_html=True)
-    st.divider()
+
     col1, col2 = st.columns([1,2])
     with col1:
         st.markdown('#### How confident do you feel about your annotation?')
