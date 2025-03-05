@@ -10,19 +10,19 @@ You will be asked to evaluate the quality of the answer following 3 statements:
 
 The answer_
 
-1. :green[Aligns with current medical knowledge.] <br>
+1. **:green[Aligns with current medical knowledge.]**
    To evaluate consider whether the answer: 
    - Provides information based on existing scientific evidence
    - Expresses certainty in line with the current state of medical knowledge
    - Does not contain contradictions or logical flaws
 
-:blue[2. Addresses the specific medical question.]
+2. **:blue[Addresses the specific medical question.]**
    To evaluate consider whether the answer:
    - Directly addresses all the concerns included in the question
    - Provides requested details and context
    - Does not contain information unrelated to the question
 
-:violet[3. Communicates contraindications or risks.]
+3. **:violet[Communicates contraindications or risks.]**
    To evaluate consider whether the answer:
    - Explains risks in clear, accessible language
    - Details all potential consequences
