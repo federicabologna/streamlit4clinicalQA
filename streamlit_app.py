@@ -29,11 +29,11 @@ if 'times' not in st.session_state:
     st.session_state.times = {}
 
 if 'main_likert' not in st.session_state:
-    st.session_state.main_likert = json.load(open(os.path.join('data', f"main_likert.json"), 'r', encoding='utf-8'))
+    st.session_state.main_likert = json.load(open(os.path.join(os.getcwd(), 'data', f"main_likert.json"), 'r', encoding='utf-8'))
 if 'conf_likert' not in st.session_state:
-    st.session_state.confidence_likert = json.load(open(os.path.join('data', f"conf_likert.json"), 'r', encoding='utf-8'))
+    st.session_state.confidence_likert = json.load(open(os.path.join(os.getcwd(), 'data', f"conf_likert.json"), 'r', encoding='utf-8'))
 if 'ease_likert' not in st.session_state:
-    st.session_state.ease_likert = json.load(open(os.path.join('data', f"ease_likert.json"), 'r', encoding='utf-8'))
+    st.session_state.ease_likert = json.load(open(os.path.join(os.getcwd(), 'data', f"ease_likert.json"), 'r', encoding='utf-8'))
 
 def assign_states(key, corr, rel, saf, conf):
     st.session_state[f'corr_{key}'] = corr
@@ -95,7 +95,7 @@ def identifiers_page1():
         if int(annotator_n) < 0 and int(annotator_n) > 6:
             st.write(":orange[Invalid Annotator #]")
     
-    animals = json.load(open(os.path.join('data', f"animals.json"), 'r', encoding='utf-8'))
+    animals = json.load(open(os.path.join(os.getcwd(), 'data', f"animals.json"), 'r', encoding='utf-8'))
     password = st.text_input("Password:")
     if annotator_n and password and password != animals[str(annotator_n)]:
         st.write(":orange[Incorrect Password]")
