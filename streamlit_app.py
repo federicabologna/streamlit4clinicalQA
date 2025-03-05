@@ -29,11 +29,11 @@ if 'times' not in st.session_state:
     st.session_state.times = {}
 
 if 'main_likert' not in st.session_state:
-    st.session_state.main_likert = json.load(open(os.path.join(f"main_likert.json"), 'r', encoding='utf-8'))
+    st.session_state.main_likert = json.load(open(os.path.join('data', f"main_likert.json"), 'r', encoding='utf-8'))
 if 'conf_likert' not in st.session_state:
-    st.session_state.confidence_likert = json.load(open(os.path.join(f"conf_likert.json"), 'r', encoding='utf-8'))
+    st.session_state.confidence_likert = json.load(open(os.path.join('data', f"conf_likert.json"), 'r', encoding='utf-8'))
 if 'ease_likert' not in st.session_state:
-    st.session_state.ease_likert = json.load(open(os.path.join(f"ease_likert.json"), 'r', encoding='utf-8'))
+    st.session_state.ease_likert = json.load(open(os.path.join('data', f"ease_likert.json"), 'r', encoding='utf-8'))
 
 def assign_states(key, corr, rel, saf, conf):
     st.session_state[f'corr_{key}'] = corr
@@ -77,25 +77,25 @@ def identifiers_page1():
                 [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
                 and that you consent to participate in the study.**''')
     
-    st.markdown('''### Instructions for testers:
-    Valid Annotator #: 2, 3, 4, 5, 6
-    Passwords:
-    * Annotator #2: tiger
-    * Annotator #3: panda
-    * Annotator #4: elephant
-    * Annotator #5: flamingo
-    * Annotator #6: dolphin
-    Valid Batch #: 0
+    # st.markdown('''### Instructions for testers:
+    # Valid Annotator #: 2, 3, 4, 5, 6
+    # Passwords:
+    # * Annotator #2: tiger
+    # * Annotator #3: panda
+    # * Annotator #4: elephant
+    # * Annotator #5: flamingo
+    # * Annotator #6: dolphin
+    # Valid Batch #: 0
     
-    If you receive the message: "You have completed all your coarse annotation" all coarse annotations in that annotator # package have been done. Please test a different annotator #
-    If you finish a batch you should see the message: You have completed the batch.''')
+    # If you receive the message: "You have completed all your coarse annotation" all coarse annotations in that annotator # package have been done. Please test a different annotator #
+    # If you finish a batch you should see the message: You have completed the batch.''')
     
     annotator_n = st.text_input("Annotator #:")
     if annotator_n:
         if int(annotator_n) < 0 and int(annotator_n) > 6:
             st.write(":orange[Invalid Annotator #]")
     
-    animals = json.load(open(os.path.join(f"animals.json"), 'r', encoding='utf-8'))
+    animals = json.load(open(os.path.join('data', f"animals.json"), 'r', encoding='utf-8'))
     password = st.text_input("Password:")
     if annotator_n and password and password != animals[str(annotator_n)]:
         st.write(":orange[Incorrect Password]")
