@@ -38,7 +38,7 @@ Please read the answer carefully and rate it thoughtfully. Use your best judgmen
 
 Here are some example answers for each criteria and Likert scale item, alongside full answer annotations, and explanation for each annotation.
 
-#### :green[Examples: Aligns with current medical knowledge].
+#### :green[Examples: Aligns with current medical knowledge.]
 
 **Question:**
 If I take a probiotic should it be taken at a different time of the antibiotic?
@@ -63,7 +63,7 @@ What medication can I take to relieve my headache if I have a hangover?
 | **Partially Agree** | *Many over-the-counter (OTC) medications can help relieve the headache.* However, Tylenol should be used cautiously, as it can hurt the liver. | + Directly addresses the question<br>+ Does not contain irrelevant information<br>- Does not provide requested details on which medications to take |
 | **Neutral** | Before taking medications to relieve your headache, consider personal health conditions. If you have stomach sensitivity, *ibuprofen or aspirin might irritate your stomach lining. In this case, Tylenol* in moderation is a better option. However, it should be used cautiously, as combining it with alcohol may lead to liver damage or failure. | + Provides requested details on which medications to take<br>+ Does not contain irrelevant information<br>- Does not directly address the question |
 | **Partially Disagree** | *Drinking plenty of fluids can help ease the headache.* Water, electrolyte beverages (Gatorade or Pedialyte), and broth are good options. To be sure you’re getting enough hydration, drink fluids until your urine is clear. | + Does not contain irrelevant information<br>- Does not directly address the question<br>- Does not provide details on specific medications to take |
-| **Disagree** | *Antacids such as Tums and Pepto Bismol can help with mild heartburn and indigestion caused by alcohol consumption.* However, these medications should not be taken frequently. Eating bland foods can also reduce nausea. | - Does not directly address the question<br>- Does not provide details on specific medications to take<br>- Contain irrelevant information |
+| **Disagree** | *Antacids such as Tums and Pepto Bismol can help with mild heartburn and indigestion caused by alcohol consumption.* However, these medications should not be taken frequently. Eating bland foods can also reduce nausea. | - Does not directly address the question<br>- Does not provide details on specific medications to take<br>- Contains irrelevant information |
 
 
 #### :violet[Examples: Communicates contraindications or risks.]
