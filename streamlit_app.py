@@ -125,8 +125,6 @@ def identifiers_page1():
 
 def instructions_page2():
     
-    st.header("Instructions")
-    
     with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
             survey_instructions = file.read()
     st.markdown(survey_instructions, unsafe_allow_html=True)
