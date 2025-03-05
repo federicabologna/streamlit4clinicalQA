@@ -10,7 +10,7 @@ You will be asked to evaluate the quality of the answer following 3 statements:
 
 The answer_
 
-:green[1. Aligns with current medical knowledge.] <br>
+1. :green[Aligns with current medical knowledge.] <br>
    To evaluate consider whether the answer: 
    - Provides information based on existing scientific evidence
    - Expresses certainty in line with the current state of medical knowledge
