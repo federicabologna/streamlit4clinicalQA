@@ -1,20 +1,24 @@
 import os
+import json
 import time
 from datetime import datetime
 import streamlit as st
+import pymongo
 from pymongo.mongo_client import MongoClient
 
 
 # Set page configuration
-st.set_page_config(layout="wide", page_title="Clinical QA Annotation")
+st.set_page_config(layout="wide", page_title="Clinical QA - Coarse Annotations")
 
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 1
-if 'batch_size' not in st.session_state:
-    st.session_state.batch_size = 9
-if 'annotator_id' not in st.session_state:
-    st.session_state.annotator_id = None
+if 'annotator_n' not in st.session_state:
+    st.session_state.annotator_n = None
+if 'batch_n' not in st.session_state:
+    st.session_state.batch_n = None
+if 'valid_batch_ns' not in st.session_state:
+    st.session_state.valid_batch_ns = ['0']
 if 'annotation_id' not in st.session_state:
     st.session_state.annotation_id = None
 if 'responses_todo' not in st.session_state:
@@ -25,23 +29,11 @@ if 'times' not in st.session_state:
     st.session_state.times = {}
 
 if 'main_likert' not in st.session_state:
-    st.session_state.main_likert = {"Disagree": 0,
-                                    "Partially Disagree": 1,
-                                    "Neutral": 2,
-                                    "Partially Agree": 3,
-                                    "Agree": 4}
+    st.session_state.main_likert = json.load(open(os.path.join(os.getcwd(), 'data', f"main_likert.json"), 'r', encoding='utf-8'))
 if 'conf_likert' not in st.session_state:
-    st.session_state.confidence_likert = {"Not confident": 0,
-                                          "Slightly confident": 1,
-                                          "Somewhat confident": 2,
-                                          "Fairly confident": 3,
-                                          "Very confident": 4}
+    st.session_state.confidence_likert = json.load(open(os.path.join(os.getcwd(), 'data', f"conf_likert.json"), 'r', encoding='utf-8'))
 if 'ease_likert' not in st.session_state:
-    st.session_state.ease_likert = {"Very difficult": 0,
-                                    "Somewhat difficult": 1,
-                                    "Neither difficult nor easy": 2,
-                                    "Somewhat easy": 3,
-                                    "Very easy": 4}
+    st.session_state.ease_likert = json.load(open(os.path.join(os.getcwd(), 'data', f"ease_likert.json"), 'r', encoding='utf-8'))
 
 def assign_states(key, corr, rel, saf, conf):
     st.session_state[f'corr_{key}'] = corr
@@ -70,56 +62,68 @@ def dispatch_batch():
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
-    db = client['annotations']  # database
-    annotator_id = st.session_state.annotator_id
-    n_annotations = st.session_state.batch_size
+    db = client['batches']  # database
+    annotator_n = st.session_state.annotator_n
+    batch_n = st.session_state.batch_n
 
-    #if len(st.session_state.responses_todo) == 0:
-    annotation_type = st.session_state.annotation_type = 'coarse'
-    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
-    batch_data = [i for i in annotations_collection.find({"rated": "No"}).limit(n_annotations)] # check if any coarse annotations left
-
-    if len(batch_data) == 0:
-        annotation_type = st.session_state.annotation_type = 'fine'
-        annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_id}_{annotation_type}']
-        
-        batch_ids = set()
-        for i in annotations_collection.find({"rated": "No"}):
-            batch_ids.add(i.get('question_id'))
-
-        batch_data = []
-        for i in list(batch_ids)[:3]:
-            batch_data.extend([i for i in annotations_collection.find({"question_id":i})])
-
-    st.session_state.responses_todo = batch_data
-    st.session_state.total_responses = len(batch_data)
-        
+    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_coarse']
+    st.session_state.responses_todo = [i for i in annotations_collection.find({ "$and": [{ "rated": "No"},
+                                                                    { "batch_id": f'batch_{batch_n}'}]})] # check if any coarse annotations left
+    st.session_state.responses_left = len(st.session_state.responses_todo)
 
 def identifiers_page1():
-    st.header("Enter your Annotator ID to start the survey.")
-    st.markdown('''**By entering your Annotator ID you confirm that you have read
+    st.header("Enter your Annotator #, Password, and Batch # to start the survey.")
+    st.markdown('''**By entering your identifiers you confirm that you have read
                 [the study's information](https://docs.google.com/document/d/1IElIVFlBgK-tVmoYeZFz5LsC1b8SoXTJZfGp4zIDvhI/edit?usp=sharing)
                 and that you consent to participate in the study.**''')
-
-    annotator_id = st.text_input("Annotator ID:")
-
+    
+    # st.markdown('''### Instructions for testers:
+    # Valid Annotator #: 2, 3, 4, 5, 6
+    # Passwords:
+    # * Annotator #2: tiger
+    # * Annotator #3: panda
+    # * Annotator #4: elephant
+    # * Annotator #5: flamingo
+    # * Annotator #6: dolphin
+    # Valid Batch #: 0
+    
+    # If you receive the message: "You have completed all your coarse annotation" all coarse annotations in that annotator # package have been done. Please test a different annotator #
+    # If you finish a batch you should see the message: You have completed the batch.''')
+    
+    annotator_n = st.text_input("Annotator #:")
+    if annotator_n:
+        if int(annotator_n) < 0 and int(annotator_n) > 6:
+            st.write(":orange[Invalid Annotator #]")
+    
+    animals = json.load(open(os.path.join(os.getcwd(), 'data', f"animals.json"), 'r', encoding='utf-8'))
+    password = st.text_input("Password:")
+    if annotator_n and password and password != animals[str(annotator_n)]:
+        st.write(":orange[Incorrect Password]")
+    
+    valid = st.session_state.valid_batch_ns
+    batch_number = st.text_input("Batch #:")
+    if batch_number and batch_number not in valid:
+        st.write(":orange[Invalid Batch #]")
+        
     leftleft, left, middle, right, rightright = st.columns(5)
-
-    if right.button("Next :arrow_forward:", use_container_width=True) or annotator_id:
-        if annotator_id:
-            st.session_state.annotator_id = annotator_id
+    cond1 = (right.button("Next :arrow_forward:", use_container_width=True) and annotator_n and password and batch_number and password == animals[str(annotator_n)] and batch_number in valid)
+    cond2 = (annotator_n and password and batch_number and password == animals[str(annotator_n)] and batch_number in valid)
+    if  cond1 or cond2:
+        if annotator_n:
+            st.session_state.annotator_n = annotator_n
+            st.session_state.batch_n = batch_number
             st.write("Loading your annotations...")
             dispatch_batch()
-            st.session_state.page = 2
+            if len(st.session_state.responses_todo) > 0:
+                st.session_state.page = 2
+            else:
+                st.session_state.page = 6
             st.rerun()
-        else:
-            st.write(":orange[Please enter your Annotator ID.]")
-            
+    else:
+        st.write(":orange[Please enter the requested information.]")
+
 
 def instructions_page2():
-    
-    st.header("Instructions")
-    st.markdown(st.session_state.annotator_id)
     
     with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
             survey_instructions = file.read()
@@ -140,24 +144,18 @@ def questions_page3():
     time.sleep(.5)
     js = '''
         <script>
-            var body = window.parent.document.querySelector(".main");
-            console.log(body);
-            body.scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         </script>
         '''
     st.components.v1.html(js, height=0)
     
-    st.markdown([(d['question_id'], d['sentence_id']) for d in st.session_state.responses_todo])
+    # st.markdown([d['question_id'] for d in st.session_state.responses_todo])
     
     annotation_d = st.session_state.responses_todo[0]
-    annotation_type = annotation_d['annotation_type']
+    annotation_type = 'coarse'
     annotations_collection = st.session_state.annotation_collection
     
-    if annotation_type == 'coarse':
-        annotation_id = annotation_d['answer_id']
-    elif annotation_type == 'fine':
-        annotation_id = annotation_d['sentence_id']
-    
+    annotation_id = annotation_d['answer_id']
     if annotation_id not in st.session_state.times.keys():
         st.session_state.times[annotation_id] = {'start': time.time()}
     
@@ -169,13 +167,8 @@ def questions_page3():
         st.header("Answer")
         st.markdown(annotation_d['answer'])
         
-        st.markdown('#### [:clipboard: Annotation instructions](https://docs.google.com/document/d/1O7Jsv7ZDTIQZmg6Ww6ZPxl4Q4zNtrCCdcXlf_9LTV4U/edit?usp=sharing)')
-
     with col2:
-        if annotation_type == 'coarse':
-            st.subheader("The information provided in the answer:")
-        elif annotation_type == 'fine':
-            st.subheader("The information provided in the highlighted sentence:")
+        st.subheader("The information provided in the answer:")
         likert_options = st.session_state.main_likert.keys()
         
         st.markdown('#### :green[aligns with current medical knowledge]')
@@ -193,7 +186,11 @@ def questions_page3():
                             options=likert_options, horizontal=True, index=likert2index(f'saf_{annotation_id}'),
                             label_visibility='hidden', key=f's_{annotation_id}')
     
-    st.divider()
+    with st.expander(':clipboard: **See Annotation Instructions**'):
+        with open(os.path.join(os.getcwd(), 'data', 'instructions.txt'), "r") as file:
+            survey_instructions = file.read()
+        st.markdown(survey_instructions, unsafe_allow_html=True)
+
     col1, col2 = st.columns([1,2])
     with col1:
         st.markdown('#### How confident do you feel about your annotation?')
@@ -224,24 +221,15 @@ def questions_page3():
                 st.session_state.times[annotation_id]['end'] = time.time()
             elapsed_time = st.session_state.times[annotation_id]['end'] - st.session_state.times[annotation_id]['start']
             
-            if annotation_type == 'coarse':
-                update_status = annotations_collection.update_one({"answer_id": annotation_id},  # Find the document with _id = 1
-                                                                {"$set": {"rated": "Yes",
-                                                                          "correctness": correctness,
-                                                                          "relevance": relevance,
-                                                                          "safety": safety,
-                                                                          "time": elapsed_time,
-                                                                          "confidence": confidence}})  # Update: change rated to yes
-            elif annotation_type == 'fine':
-                update_status = annotations_collection.update_one({"sentence_id": annotation_id},  # Find the document with _id = 1
-                                                                {"$set": {"rated": "Yes",
-                                                                          "correctness": correctness,
-                                                                          "relevance": relevance,
-                                                                          "safety": safety,
-                                                                          "time": elapsed_time,
-                                                                          "confidence": confidence}})
+            update_status = annotations_collection.update_one({"answer_id": annotation_id},  # Find the document with _id = 1
+                                                            {"$set": {"rated": "Yes",
+                                                                        "correctness": correctness,
+                                                                        "relevance": relevance,
+                                                                        "safety": safety,
+                                                                        "time": elapsed_time,
+                                                                        "confidence": confidence}})  # Update: change rated to yes
  
-            # if annotation done is less then total number per batch
+            # if annotation to do is more than 0
             if len(st.session_state.responses_todo) > 0:
                 st.session_state.page = 3 # Repeat page
                 st.rerun()
@@ -274,15 +262,19 @@ def followup_page4():
         st.rerun()
 
     elif right.button("Next :arrow_forward:", use_container_width=True, type="primary"):
-        collection = db[f'annotator{st.session_state.annotator_id}'].insert_one({'batch': [(d['question_id'], d['answer_id']) for d in st.session_state.responses_done],
+        collection = db[f'annotator{st.session_state.annotator_n}'].insert_one({'batch': [(d['question_id'], d['answer_id']) for d in st.session_state.responses_done],
                                                                'datetime': datetime.now(),
                                                                'ease': ease})
         st.session_state.page = 5
         st.rerun()
         
-def end_page5():
+def batch_end_page5():
     st.title("Thank You!")
     st.markdown("#### You have completed the batch. Your responses have been saved.")
+
+def coarse_end_page6():
+    st.title("Thank You!")
+    st.markdown("#### You have completed all your coarse annotations. Please move on to the fine annotations.")
 
 
 # Display the appropriate page based on the session state
@@ -295,11 +287,13 @@ elif st.session_state.page == 3:
 elif st.session_state.page == 4:
     followup_page4()
 elif st.session_state.page == 5:
-    end_page5()
+    batch_end_page5()
+elif st.session_state.page == 6:
+    coarse_end_page6()
 
 
 if len(st.session_state.responses_done) > 0:
-    current_progress = int(len(st.session_state.responses_done)/st.session_state.total_responses*100)
+    current_progress = int(len(st.session_state.responses_done)/st.session_state.responses_left*100)
     st.progress(current_progress)
     st.write(f"{current_progress}%")
 else:
