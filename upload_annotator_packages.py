@@ -16,7 +16,7 @@ except Exception as e:
     print(e)
 
 output_dir = os.path.join(os.getcwd(), 'output')
-db = client['batches']  # Replace with your database name
+db = client['pilot']  # Replace with your database name
 
 
 def upload_pilot():

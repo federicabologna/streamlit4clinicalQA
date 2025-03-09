@@ -62,7 +62,7 @@ def dispatch_batch():
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
-    db = client['batches']  # database
+    db = client['pilot']  # database
     annotator_n = st.session_state.annotator_n
     batch_n = st.session_state.batch_n
 

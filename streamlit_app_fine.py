@@ -62,11 +62,11 @@ def dispatch_batch():
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
-    db = client['batches']  # database
+    db = client['fine-test']  # TEST DATABASE DO NOT CHANGE
     annotator_n = st.session_state.annotator_n
     batch_n = st.session_state.batch_n
 
-    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_coarse']
+    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_fine']
     st.session_state.responses_todo = [i for i in annotations_collection.find({ "$and": [{ "rated": "No"},
                                                                     { "batch_id": f'batch_{batch_n}'}]})] # check if any coarse annotations left
     st.session_state.responses_left = len(st.session_state.responses_todo)
