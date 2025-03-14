@@ -25,7 +25,7 @@ def export_annotations_to_jsonl(mongo_uri, db_name, output_folder):
 
 uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
 client = MongoClient(uri)
-db_name = "batches"  # Database containing multiple collections
+db_name = "pilot"  # Database containing multiple collections
 output_folder = "pilot_results"
 os.makedirs(os.path.join('output', 'pilot_results'), exist_ok=True)
 export_annotations_to_jsonl(uri, db_name, output_folder)
