@@ -90,6 +90,9 @@ def identifiers_page1():
     # If you receive the message: "You have completed all your coarse annotation" all coarse annotations in that annotator # package have been done. Please test a different annotator #
     # If you finish a batch you should see the message: You have completed the batch.''')
     
+    dispatch_batch()
+    st.markdown(st.session_state.responses_todo)
+    
     annotator_n = st.text_input("Annotator #:")
     if annotator_n:
         if int(annotator_n) < 0 and int(annotator_n) > 6:
