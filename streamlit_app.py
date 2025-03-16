@@ -66,7 +66,7 @@ def dispatch_batch():
     annotator_n = st.session_state.annotator_n
     batch_n = st.session_state.batch_n
 
-    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}_coarse']
+    annotations_collection = st.session_state.annotation_collection = db[f'annotator{annotator_n}']
     st.session_state.responses_todo = [i for i in annotations_collection.find({ "$and": [{ "rated": "No"},
                                                                     { "batch_id": f'batch_{batch_n}'}]})] # check if any coarse annotations left
     st.session_state.responses_left = len(st.session_state.responses_todo)
