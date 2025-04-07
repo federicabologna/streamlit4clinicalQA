@@ -92,14 +92,12 @@ def dispatch_batch():
     # b/c we inserted based on annotator# in upload.py
     annotations_collection = st.session_state.annotation_collection = db[
         f"annotator{annotator_n}"
-    ]  # TODO: modify for other annotators, currently used for testing purposes
+    ]
 
     st.session_state.responses_todo = [
         i
         for i in annotations_collection.find(
             {"$and": [{"rated": "No"}, {"batch_id": f"batch_{batch_n}"}]}
-            # TODO: change back to iterative batches after they have all been uploaded
-            # {"$and": [{"rated": "No"}, {"batch_id": f"batch_1"}]}
         )
     ]  # check if any fine annotations left
 
@@ -193,9 +191,6 @@ def instructions_page2():
 
 
 def questions_page3():
-
-    # TODO: DISPLAY Qs FOR FINE-GRAINED
-
     time.sleep(0.5)
     js = """
         <script>
@@ -204,9 +199,8 @@ def questions_page3():
         """
     st.components.v1.html(js, height=0)
 
-    # TODO: use this to check if questions r in order
-    # use sentence_id to check
-    st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
+    # Uncomment to check if sentences are displaying in the correct order.
+    # st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
 
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = "fine"
@@ -323,12 +317,6 @@ def questions_page3():
                     }
                 },
             )  # Update: change rated to yes
-
-            # Print the state of the database to check that the new annotation was added
-            # updated_annotation = annotations_collection.find_one(
-            #     {"sentence_id": annotation_id}
-            # )
-            # print(updated_annotation)
 
             # if annotation to do is more than 0
             if len(st.session_state.responses_todo) > 0:
