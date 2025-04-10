@@ -104,6 +104,7 @@ def identifiers_page1():
     batch_number = st.text_input("Batch #:")
     if batch_number not in valid:
         st.write('what')
+        st.write(batch_number)
     if batch_number and batch_number not in valid:
         st.write(":orange[Invalid Batch #]")
         
