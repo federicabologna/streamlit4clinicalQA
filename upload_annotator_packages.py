@@ -18,21 +18,20 @@ except Exception as e:
 output_dir = os.path.join(os.getcwd(), 'output')
 
 
-def upload_pilot():
-    db = client['pilot']  # Replace with your database name
+def upload_pilot(annotation_type, pilot_name):
+    db = client[annotation_type]  # Replace with your database name
     annotators = [f'annotator{n}' for n in range(1,7)]
-    for annotator in annotators:
-        for annotation_type in ['coarse']:#,'fine']:
-            key = f'{annotator}_{annotation_type}'
-            with open(os.path.join(output_dir, 'pilot', f"batches_pilot_{annotation_type}.jsonl"), 'r', encoding='utf-8') as jsonl_file:
-                batches = [json.loads(line) for line in jsonl_file]
-            result = db[key].insert_many(batches)
-            print(key)
-            print(f"Inserted {len(result.inserted_ids)} documents into the collection.")
+    for annotator in annotators[1:]:
+        key = f'{annotator}'
+        with open(os.path.join(output_dir, 'pilot', f"{pilot_name}_{annotation_type}.jsonl"), 'r', encoding='utf-8') as jsonl_file:
+            batches = [json.loads(line) for line in jsonl_file]
+        result = db[key].insert_many(batches)
+        print(key)
+        print(f"Inserted {len(result.inserted_ids)} documents into the collection.")
 
 
 def upload_annotations(typ):
-    
+
     db = client[typ]  # Replace with your database name
 
     annotator_l = [i for i in range(1,7)]
@@ -50,5 +49,5 @@ def upload_annotations(typ):
         print(f"Inserted {len(result.inserted_ids)} documents into the collection.")
 
 if __name__ == "__main__":
-    # upload_pilot()
-    upload_annotations('coarse')
+    upload_pilot('coarse', 'pilot2')
+    # upload_annotations('coarse')
