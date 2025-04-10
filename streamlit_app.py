@@ -104,7 +104,7 @@ def identifiers_page1():
     batch_number = st.text_input("Batch #:")
     if batch_number and batch_number not in valid:
         st.write(":orange[Invalid Batch #]")
-        st.write(batch_number)
+        # st.write(batch_number)
         
     leftleft, left, middle, right, rightright = st.columns(5)
     cond1 = (right.button("Next :arrow_forward:", use_container_width=True) and annotator_n and password and batch_number and password == animals[str(annotator_n)] and batch_number in valid)
