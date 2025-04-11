@@ -18,7 +18,7 @@ if 'annotator_n' not in st.session_state:
 if 'batch_n' not in st.session_state:
     st.session_state.batch_n = None
 if 'valid_batch_ns' not in st.session_state:
-    st.session_state.valid_batch_ns = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X']
+    st.session_state.valid_batch_ns = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X', '10']
 if 'annotation_id' not in st.session_state:
     st.session_state.annotation_id = None
 if 'responses_todo' not in st.session_state:
@@ -60,7 +60,6 @@ def likert2index(key):
 def dispatch_batch():
     mongodb_credentials = st.secrets.mongodb_credentials
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
-    # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)     # Create a new client and connect to the server
     db = client['coarse']  # database
     annotator_n = st.session_state.annotator_n
@@ -150,7 +149,7 @@ def questions_page3():
         '''
     st.components.v1.html(js, height=0)
     
-    # st.markdown([d['question_id'] for d in st.session_state.responses_todo])
+    st.markdown([d['question_id'] for d in st.session_state.responses_todo])
     
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = 'coarse'
