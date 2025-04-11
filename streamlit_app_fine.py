@@ -5,6 +5,7 @@ from datetime import datetime
 import streamlit as st
 import pymongo
 from pymongo.mongo_client import MongoClient
+import random
 
 
 # Set page configuration
@@ -91,12 +92,19 @@ def dispatch_batch():
         f"annotator{annotator_n}"
     ]
 
+    # .find().sort({"_id": 1})
     st.session_state.responses_todo = [
         i
         for i in annotations_collection.find(
             {"$and": [{"rated": "No"}, {"batch_id": f"batch_{batch_n}"}]}
         )
     ]  # check if any fine annotations left
+
+    # unique_answer_ids = annotations_collection.distinct("answer_id")
+    # # keep ordering of answer_id and all corresponding sentence_ids
+    # random.shuffle(unique_answer_ids)
+    # res = []
+    # # for i in range(len(unique_answer_ids)):
 
     st.session_state.responses_left = len(st.session_state.responses_todo)
 
@@ -197,7 +205,8 @@ def questions_page3():
     st.components.v1.html(js, height=0)
 
     # Uncomment to check if sentences are displaying in the correct order.
-    st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
+    # st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
+    st.markdown([d["answer_id"] for d in st.session_state.responses_todo])
 
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = "fine"
