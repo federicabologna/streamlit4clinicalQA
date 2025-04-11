@@ -78,11 +78,8 @@ def likert2index(key):
 
 
 def dispatch_batch():
-    # mongodb_credentials = st.secrets.mongodb_credentials
-    # uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
-    # uri = f"mongodb+srv://{open(os.path.join('..', '..', 'PhD', 'apikeys', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
-
-    uri = f"mongodb+srv://{open(os.path.join('..', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
+    mongodb_credentials = st.secrets.mongodb_credentials
+    uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)  # Create a new client and connect to the server
     db = client["fine-test"]  # TEST DATABASE DO NOT CHANGE
     annotator_n = st.session_state.annotator_n
