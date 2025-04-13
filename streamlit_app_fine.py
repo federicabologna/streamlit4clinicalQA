@@ -92,19 +92,26 @@ def dispatch_batch():
         f"annotator{annotator_n}"
     ]
 
-    # .find().sort({"_id": 1})
-    st.session_state.responses_todo = [
+    mongodb_result = [
         i
         for i in annotations_collection.find(
             {"$and": [{"rated": "No"}, {"batch_id": f"batch_{batch_n}"}]}
         )
     ]  # check if any fine annotations left
+    
+    grouped = OrderedDict()
+    for item in mongodb_result:
+        answer_id = item['answer_id']
+        if answer_id not in grouped:
+            grouped[answer_id] = []
+        grouped[answer_id].append(item)
+        
+    for aid in grouped:
+        grouped[aid] = sorted(grouped[aid], key=lambda x: x['sentence_id'])
 
-    # unique_answer_ids = annotations_collection.distinct("answer_id")
-    # # keep ordering of answer_id and all corresponding sentence_ids
-    # random.shuffle(unique_answer_ids)
-    # res = []
-    # # for i in range(len(unique_answer_ids)):
+    clean_responses_todo = [item for group in grouped.values() for item in group]
+    
+    st.session_state.responses_todo = clean_responses_todo
 
     st.session_state.responses_left = len(st.session_state.responses_todo)
 
