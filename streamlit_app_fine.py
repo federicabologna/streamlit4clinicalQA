@@ -108,7 +108,7 @@ def dispatch_batch():
         grouped[answer_id].append(item)
         
     for aid in grouped:
-        grouped[aid] = sorted(grouped[aid], key=lambda x: x['sentence_id'])
+        grouped[aid] = sorted(grouped[aid], key=lambda x: int(x['sentence_id'].split('_')[-1]))
 
     clean_responses_todo = [item for group in grouped.values() for item in group]
     

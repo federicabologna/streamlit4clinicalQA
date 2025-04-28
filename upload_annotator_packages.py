@@ -40,7 +40,7 @@ def upload_annotations(typ):
         key = f'annotator{n}'
         print(key)
         # Read JSONL file and insert into MongoDB
-        with open(os.path.join(output_dir, 'all', f"{key}_{typ}.jsonl"), 'r', encoding='utf-8') as jsonl_file:
+        with open(os.path.join(output_dir, 'all', f"{key}_{typ}_sampled.jsonl"), 'r', encoding='utf-8') as jsonl_file:
             annotations = [json.loads(line) for line in jsonl_file]  # Parse each line as JSON
 
         # Insert documents into the collection
