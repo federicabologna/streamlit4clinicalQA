@@ -49,5 +49,5 @@ def upload_annotations(typ):
         print(f"Inserted {len(result.inserted_ids)} documents into the collection.")
 
 if __name__ == "__main__":
-    upload_pilot('coarse', 'pilot2')
-    # upload_annotations('coarse')
+    # upload_pilot('coarse', 'pilot2')
+    upload_annotations('fine2')
