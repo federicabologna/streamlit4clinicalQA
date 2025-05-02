@@ -8,7 +8,7 @@ with open(os.path.join('output', 'pilot', f"pilot1_fine.jsonl"), 'r', encoding='
    data = [json.loads(line) for line in jsonl_file]
 
 for d in data:
-   st.markdown(d['answer'])
+   st.markdown(d['answer'], unsafe_allow_html=True)
    st.markdown('\n')
    st.divider()
    
