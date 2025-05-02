@@ -18,12 +18,12 @@ except Exception as e:
 output_dir = os.path.join(os.getcwd(), 'output')
 
 
-def upload_pilot(annotation_type, pilot_name):
-    db = client[annotation_type]  # Replace with your database name
+def upload_pilot(pilot_name):
+    db = client[pilot_name]  # Replace with your database name
     annotators = [f'annotator{n}' for n in range(1,7)]
-    for annotator in annotators[1:]:
+    for annotator in annotators:
         key = f'{annotator}'
-        with open(os.path.join(output_dir, 'pilot', f"{pilot_name}_{annotation_type}.jsonl"), 'r', encoding='utf-8') as jsonl_file:
+        with open(os.path.join(output_dir, 'pilot', f"{pilot_name}.jsonl"), 'r', encoding='utf-8') as jsonl_file:
             batches = [json.loads(line) for line in jsonl_file]
         result = db[key].insert_many(batches)
         print(key)
@@ -49,5 +49,5 @@ def upload_annotations(typ):
         print(f"Inserted {len(result.inserted_ids)} documents into the collection.")
 
 if __name__ == "__main__":
-    # upload_pilot('coarse', 'pilot2')
-    upload_annotations('fine2')
+    upload_pilot('pilot1_fine')
+    # upload_annotations('fine2')

@@ -4,13 +4,12 @@ import time
 from datetime import datetime
 import streamlit as st
 
-with open(os.path.join('data', f"wrong_ones.json"), 'r', encoding='utf-8') as json_file:
-   data = json.load(json_file)
+with open(os.path.join('output', 'pilot', f"pilot1_fine.jsonl"), 'r', encoding='utf-8') as jsonl_file:
+   data = [json.loads(line) for line in jsonl_file]
 
-for key, value in data.items():
-   for tup in value:
-      st.markdown(tup[1])
-      st.markdown('\n')
-      st.divider()
+for d in data:
+   st.markdown(d['answer'])
+   st.markdown('\n')
+   st.divider()
    
    
