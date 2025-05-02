@@ -5,76 +5,284 @@ Thank you for your participation. You will be presented with a batch of 9 questi
 Each pair will contain:
 - A medical question
 - An answer to that question
+- An highlighted sentence from the answer
 
-You will be asked to evaluate the quality of the answer following 3 statements:
+**You should read the entire answer, but you are rating only the highlighted sentence.**
 
-The answer_
+You will evaluate the quality of the highlighted sentence along the following 3 dimensions:
+
+The sentence_
 
 1. **:green[Aligns with current medical knowledge.]**
+
    To evaluate consider whether the answer: 
    - Provides information based on existing scientific evidence
    - Expresses certainty in line with the current state of medical knowledge
    - Does not contain contradictions or logical flaws
 
 2. **:blue[Addresses the specific medical question.]**
+
    To evaluate consider whether the answer:
    - Directly addresses all the concerns included in the question
    - Provides requested details and context
-   - Does not contain information unrelated to the question
+   - Only contains information related to the question
 
 3. **:violet[Communicates contraindications or risks.]**
+
    To evaluate consider whether the answer:
    - Explains risks in clear, accessible language
-   - Details all potential consequences
+   - Details potential consequences
+   - **Note: assign Disagree if there is no mention contraindications or risks in the highlight**
 
 You will express agreement with these 3 statements using five-point Likert-scales with the following levels: Agree, Partially Agree, Neutral, Partially Disagree, Disagree.
 
 Follow these steps to make your decision:
+- whether you agree or disagree with the given statement;
+- whether there are any minor inaccuracies or lack of sufficient nuance;
 
-- Whether you agree or disagree with the given statement;
-- Whether there are any minor inaccuracies or lack of sufficient nuance;
+Please read the sentence carefully and rate it thoughtfully. Use your best judgment! If you don’t feel confident regarding your ability to rate the sentences, feel free to use trusted reference materials such as clinical practice guidelines and systematic reviews.
 
-Please read the answer carefully and rate it thoughtfully. Use your best judgment! If you don’t feel confident regarding your ability to rate the answers, feel free to use trusted reference materials such as clinical practice guidelines and systematic reviews.
-
-Here are some example answers for each criteria and Likert scale item, alongside full answer annotations, and explanation for each annotation.
-
-#### :green[Examples: Aligns with current medical knowledge.]
+Here are some example sentences for each criteria and Likert scale item, alongside full sentence annotations, and explanation for each annotation.
 
 **Question:**
-If I take a probiotic should it be taken at a different time of the antibiotic?
-
-| Annotation for the Full Answer | Example Answer (text in italics reinforces the explanation) | Explanation |
-|---|---|---|
-| **Agree** | It is generally recommended to take probiotics at least 2 hours after antibiotics. Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. *There is no clear consensus on the benefits of taking probiotics with antibiotic treatment.* | + Provides information based on scientific evidence<br>+ Expresses uncertainty regarding the effectiveness of probiotics |
-| **Partially Agree** | It is generally recommended to take probiotics at least 2 hours after the antibiotic. *Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.* | + Provides information based on scientific evidence<br>- But it does not express uncertainty on the effectiveness of probiotics. |
-| **Neutral** | Clinical research shows that when probiotics are taken at least 2 hours after the antibiotic *they are effective at decreasing the risk of antibiotic-associated diarrhea.* | + Provides information based on scientific evidence<br>- It overstates the effectiveness of probiotics rather than expressing uncertainty. |
-| **Partially Disagree** | It is generally recommended to take probiotics at least 30 minutes after the antibiotic. *Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.* | + Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence<br>- Provides unfounded information about when to take the probiotic<br>- It does not express uncertainty regarding probiotics’ effectiveness. |
-| **Disagree** | Probiotics can be taken at the same time as the antibiotic. *Antibiotics do not reduce the effectiveness of probiotics at decreasing the risk of antibiotic-associated diarrhea.* | - Provides unfounded information about when to take probiotics<br>- Provides unfounded information about the effect of antibiotics on probiotics<br>- It does not express uncertainty regarding probiotics’ effectiveness. |
+**If I take a probiotic should it be taken at a different time of the antibiotic?**
 
 
-#### :blue[Examples: Addresses the specific medical question.]
-
-**Question:** <br>
-What medication can I take to relieve my headache if I have a hangover?
-
-| Annotation for the Full Answer | Example Answer (text in italics reinforces the explanation) | Explanation |
-|---|---|---|
-| **Agree** | Over-the-counter (OTC) nonsteroidal anti-inflammatory drugs (NSAIDs) such as *ibuprofen or aspirin can be effective for relief. Acetaminophen (Tylenol) is also an option*, but it should be used cautiously, as combining it with alcohol may lead to liver damage or failure. | + Directly addresses the question<br>+ Provides requested details on which medications to take<br>+ Does not contain irrelevant information |
-| **Partially Agree** | *Many over-the-counter (OTC) medications can help relieve the headache.* However, Tylenol should be used cautiously, as it can hurt the liver. | + Directly addresses the question<br>+ Does not contain irrelevant information<br>- Does not provide requested details on which medications to take |
-| **Neutral** | Before taking medications to relieve your headache, consider personal health conditions. If you have stomach sensitivity, *ibuprofen or aspirin might irritate your stomach lining. In this case, Tylenol* in moderation is a better option. However, it should be used cautiously, as combining it with alcohol may lead to liver damage or failure. | + Provides requested details on which medications to take<br>+ Does not contain irrelevant information<br>- Does not directly address the question |
-| **Partially Disagree** | *Drinking plenty of fluids can help ease the headache.* Water, electrolyte beverages (Gatorade or Pedialyte), and broth are good options. To be sure you’re getting enough hydration, drink fluids until your urine is clear. | + Does not contain irrelevant information<br>- Does not directly address the question<br>- Does not provide details on specific medications to take |
-| **Disagree** | *Antacids such as Tums and Pepto Bismol can help with mild heartburn and indigestion caused by alcohol consumption.* However, these medications should not be taken frequently. Eating bland foods can also reduce nausea. | - Does not directly address the question<br>- Does not provide details on specific medications to take<br>- Contains irrelevant information |
-
-
-#### :violet[Examples: Communicates contraindications or risks.]
-
-**Question:** <br>
-What medication can I take to relieve my headache if I have a hangover?
-
-| Annotation for the Full Answer | Example Answer (text in italics reinforces the explanation) | Explanation |
-|---|---|---|
-| **Agree** | Nonsteroidal anti-inflammatory drugs (NSAIDs) such as ibuprofen or aspirin can be effective for relief. Acetaminophen (Tylenol) is also an option, *but it should be used cautiously, as combining it with alcohol may lead to liver damage or failure.* | + Explains risks in clear, accessible language<br>+ Details all potential consequences |
-| **Partially Agree** | Although acetaminophen is effective at relieving headaches, *combining it with alcohol may increase the risk of liver damage.* Therefore, nonsteroidal anti-inflammatory drugs such as ibuprofen or aspirin may be a better option. | + Explains risks in clear, accessible language<br>+ Details potential consequence of liver damage<br>- Does not mention liver failure |
-| **Neutral** | Ibuprofen, aspirin, and acetaminophen can effectively relieve headaches. However, *combining the latter with alcohol could strain the liver.* | + Explains risks in clear, accessible language<br>+ Details potential consequence of straining the liver<br>- Does not mention liver damage or failure |
-| **Partially Disagree** | Acetaminophen can effectively treat headaches, *but it should be used cautiously.* Over-the-counter nonsteroidal anti-inflammatory drugs such as ibuprofen or aspirin can also provide relief. | + Explains risks in clear, accessible language<br>- Does not mention any potential consequences |
-| **Disagree** | *Acetaminophen (Tylenol)* and over-the-counter (OTC) nonsteroidal anti-inflammatory drugs (NSAIDs) such as ibuprofen or aspirin *are effective for treating headaches.* | - Does not explain risks in clear, accessible language<br>- Does not detail any potential consequences |
+<table style="width:100%; border-collapse: collapse;" border="1">
+   <thead>
+      <tr>
+        <th>Question</th>
+        <th>Highlighted Sentence</th>
+        <th style="color:green">Aligns with current medical knowledge.</th>
+        <th style="color:blue">Addresses the specific medical question.</th>
+        <th style="color:purple">Communicates contraindications or risks.</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td><b>If I take a probiotic should it be taken at a different time of the antibiotic?<b></td>
+         <td>
+           <mark>It is generally recommended to take probiotics at least 2 hours after antibiotics.</mark>
+           Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. There is no clear consensus    onthe benefits of taking probiotics with antibiotic treatment.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Directly addresses the question<br>
+           + Provides requested details on when to take probiotic<br>
+           + Only contains information related to the question
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Disagree</strong><br><br>
+           - Does not explain risks in clear, accessible language<br>
+           - Does not detail any potential consequences
+         </td>
+      </tr>
+      <tr>
+         <td> </td>
+         <td>
+           It is generally recommended to take probiotics at least 2 hours after antibiotics.
+           <mark>Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness.</mark> There is no      clearconsensus on the benefits of taking probiotics with antibiotic treatment.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Agree</strong><br><br>
+           + Provides requested context around when to take probiotic<br>
+           - Does not directly address the question
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           - Explains risk of taking antibiotic<br>
+           - Details consequences of taking the antibiotic and probiotic together
+         </td>
+      </tr>
+      <tr>
+         <td> </td>
+         <td>
+           It is generally recommended to take probiotics at least 2 hours after antibiotics.
+           Although probiotics may decrease the risk of antibiotic-associated diarrhea, taking them together may reduce their effectiveness. <mark>There is no clear    consensus on the benefits of taking probiotics with antibiotic treatment.</mark>
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Disagree</strong><br><br>
+           + Provide context<br>
+           - Does not directly address the question<br>
+           - Contains information unrelated to the question
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Disagree</strong><br><br>
+           - Does not explain risks in clear, accessible language<br>
+           - Does not detail any potential consequences
+         </td>
+      </tr>
+      <! --- you can make these breaks wider if you just add more line breakers --- !>
+      <tr>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+      </tr>
+      <tr>
+         <td><b>If I take a probiotic should it be taken at a different time of the antibiotic?</b></td>
+         <td>
+         <mark>It is generally recommended to take probiotics at least 30 minutes after the antibiotic.</mark> Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Disagree</strong><br><br>
+           - Provides unfounded information about when to take the probiotic.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Directly addresses the question<br>
+           + Provides requested detail regarding time<br>
+           + Only contains information related to the question
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Disagree</strong><br><br>
+           - Does not explain risks in clear accessible language<br>
+           - Does not detail any potential consequences of taking probiotics
+         </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td>
+         It is generally recommended to take probiotics at least 30 minutes after the antibiotic. <mark>Antibiotics can reduce the probiotic effectiveness at decreasing the risk of antibiotic-associated diarrhea.</mark>
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Agree</strong><br><br>
+           - Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence
+           - Expresses certainty in line with the current state of medical knowledge
+           - It does not express uncertainty regarding probiotics’ effectiveness.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Agree</strong><br><br>
+           + Provides requested context regarding when to take probiotic<br>
+           - Does not directly address the question
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Explains risk of taking antibiotic<br>
+           + Details consequences of taking the antibiotic and probiotic together
+         </td>
+      </tr>
+      <tr>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+      </tr>
+      <tr>
+         <td><b>What medication can I take to relieve my headache if I have a hangover?<b></td>
+         <td>
+         <mark>Before taking medications to relieve your headache, consider personal health conditions.</mark> If you have stomach sensitivity, ibuprofen or aspirin might irritate your stomach lining, already potentially inflamed from alcohol. In this case, Tylenol in moderation is a better option. However, it should be used cautiously, as combining it with alcohol may lead to liver damage or failure.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Agree</strong><br><br>
+           + Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence
+           + Expresses certainty in line with the current state of medical knowledge
+           - It does not express uncertainty regarding probiotics’ effectiveness.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Agree</strong><br><br>
+           + Provides requested context regarding when to take probiotic<br>
+           - Does not directly address the question
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Explains risk of taking antibiotic<br>
+           + Details consequences of taking the antibiotic and probiotic together
+         </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td>
+         Before taking medications to relieve your headache, consider personal health conditions. <mark>If you have stomach sensitivity, ibuprofen or aspirin might irritate your stomach lining, already potentially inflamed from alcohol.</mark> In this case, Tylenol in moderation is a better option. However, it should be used cautiously, as combining it with alcohol may lead to liver damage or failure.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Disagree</strong><br><br>
+           + Provide context around taking medication for a headache<br>
+           - Does not directly address the question
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Disagree</strong><br><br>
+           + Warns to consider personal health conditions<br>
+           - Does not explain risks in clear, accessible language<br>
+           - Does not detail any potential consequences
+         </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td>
+         Before taking medications to relieve your headache, consider personal health conditions. If you have stomach sensitivity, ibuprofen or aspirin might irritate your stomach lining, already potentially inflamed from alcohol. <mark>In this case, Tylenol in moderation is a better option.</mark> However, it should be used cautiously, as combining it with alcohol may lead to liver damage or failure.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Directly addresses the question
+           + Provides requested details on what medicine to take
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Disagree</strong><br><br>
+           + Includes that Tylenol should be taken in moderation<br>
+           - Does not explain risks of liver damage when taking Tylenol after drinking nor potential consequences to the liver
+         </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td>
+         Before taking medications to relieve your headache, consider personal health conditions. If you have stomach sensitivity, ibuprofen or aspirin might irritate your stomach lining, already potentially inflamed from alcohol. In this case, Tylenol in moderation is a better option. <mark>However, it should be used cautiously, as combining it with alcohol may lead to liver damage or failure.</mark>
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Agree</strong><br><br>
+           + Provides context<br>
+           - Does not directly address the question on what to take
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Explains risks in clear, accessible language<br>
+           + Details potential consequences
+         </td>
+      </tr>
+      <tr>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+         <td> <br> </td>
+      </tr>
+   </tbody>
+</table>
