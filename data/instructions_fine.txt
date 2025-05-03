@@ -47,6 +47,19 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
 **Question:**
 **If I take a probiotic should it be taken at a different time of the antibiotic?**
 
+<style>
+  table {
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+  th, td {
+    width: 20%; /* 5 cols so ea col takes up 20% of the 100% width set above */
+    border: 1px solid #aaa;
+    padding: 10px;
+    vertical-align: top;
+    word-wrap: break-word; /* allow long text to wrap */
+  }
+</style>
 
 <table style="width:100%; border-collapse: collapse;" border="1">
    <thead>
@@ -166,8 +179,8 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          </td>
          <td style="vertical-align: top;">
            <strong>Partially Agree</strong><br><br>
-           - Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence
-           - Expresses certainty in line with the current state of medical knowledge
+           - Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence<br>
+           - Expresses certainty in line with the current state of medical knowledge<br>
            - It does not express uncertainty regarding probiotics’ effectiveness.
          </td>
          <td style="vertical-align: top;">
@@ -195,8 +208,8 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          </td>
          <td style="vertical-align: top;">
            <strong>Partially Agree</strong><br><br>
-           + Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence
-           + Expresses certainty in line with the current state of medical knowledge
+           + Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
            - It does not express uncertainty regarding probiotics’ effectiveness.
          </td>
          <td style="vertical-align: top;">
@@ -283,6 +296,94 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          <td> <br> </td>
          <td> <br> </td>
          <td> <br> </td>
+      </tr>
+      <tr>
+         <td><b>Does a gluten-free diet reduce inflammation?</b></td>
+         <td>
+         <mark>Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS).</mark> In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation. In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood. <br><br>
+         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Directly addresses the question<br>
+           + Provides requested information on a case where gluten-free diets may reduce inflammation
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Disagree</strong><br><br>
+           - Does not contain any information on the risks of a gluten-free diet
+         </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td>
+         Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS). <mark>In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation.</mark> In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood. <br><br>
+         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Agree/Neutral</strong><br><br>
+           + Provides context about how gluten can cause inflammation<br>
+           + Explains why the gluten-free diet reduces inflammation specifically for celiac disease<br>
+           - Does not directly address whether going gluten-free would directly reduce inflammation
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Disagree</strong><br><br>
+           - Does not contain any information on the risks of a gluten-free diet
+         </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td>
+         Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS). In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation. <mark>In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood.</mark> <br><br>
+         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten.
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Partially Disagree</strong><br><br>
+           + Explains that consuming gluten may lead to certain unwanted symptoms<br>
+           - Does not directly address whether going gluten-free would directly reduce inflammation
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Disagree</strong><br><br>
+           - Does not contain any information on the risks of a gluten-free diet
+         </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td>
+         Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS). In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation. In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood.<br><br>
+         <mark>For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten.</mark> 
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Provides information based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           + Does not contain contradictions or flaws
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Disagree</strong><br><br>
+           - Does not answer if going gluten-free would reduce inflammation
+         </td>
+         <td style="vertical-align: top;">
+           <strong>Agree</strong><br><br>
+           + Explains risks of going gluten-free in clear, accessible language
+         </td>
       </tr>
    </tbody>
 </table>
