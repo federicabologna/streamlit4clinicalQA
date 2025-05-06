@@ -231,7 +231,7 @@ def questions_page3():
 
         st.header("Answer")
 
-        st.markdown(annotation_d["answer"], unsafe_allow_html=Tru)
+        st.markdown(annotation_d["answer"], unsafe_allow_html=True)
 
     with col2:
         st.subheader("The information provided in the answer:")
