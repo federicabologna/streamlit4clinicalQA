@@ -25,7 +25,7 @@ The sentence_
    To evaluate consider whether the answer:
    - Directly addresses all the concerns included in the question
    - Provides requested details and context
-   - Only contains information related to the question
+   - Contains only information related to the question
 
 3. **:violet[Communicates contraindications or risks.]**
 

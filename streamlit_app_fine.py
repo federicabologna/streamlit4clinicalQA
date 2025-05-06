@@ -2,6 +2,7 @@ import os
 import json
 import time
 from datetime import datetime
+from collections import OrderedDict
 import streamlit as st
 import pymongo
 from pymongo.mongo_client import MongoClient
@@ -82,7 +83,7 @@ def dispatch_batch():
     mongodb_credentials = st.secrets.mongodb_credentials
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)  # Create a new client and connect to the server
-    db = client["fine-test"]  # TEST DATABASE DO NOT CHANGE
+    db = client["fine2"]  # TEST DATABASE DO NOT CHANGE
     annotator_n = st.session_state.annotator_n
     batch_n = st.session_state.batch_n
 
@@ -92,19 +93,26 @@ def dispatch_batch():
         f"annotator{annotator_n}"
     ]
 
-    # .find().sort({"_id": 1})
-    st.session_state.responses_todo = [
+    mongodb_result = [
         i
         for i in annotations_collection.find(
             {"$and": [{"rated": "No"}, {"batch_id": f"batch_{batch_n}"}]}
         )
     ]  # check if any fine annotations left
+    
+    grouped = OrderedDict()
+    for item in mongodb_result:
+        answer_id = item['answer_id']
+        if answer_id not in grouped:
+            grouped[answer_id] = []
+        grouped[answer_id].append(item)
+        
+    for aid in grouped:
+        grouped[aid] = sorted(grouped[aid], key=lambda x: int(x['sentence_id'].split('_')[-1]))
 
-    # unique_answer_ids = annotations_collection.distinct("answer_id")
-    # # keep ordering of answer_id and all corresponding sentence_ids
-    # random.shuffle(unique_answer_ids)
-    # res = []
-    # # for i in range(len(unique_answer_ids)):
+    clean_responses_todo = [item for group in grouped.values() for item in group]
+    
+    st.session_state.responses_todo = clean_responses_todo
 
     st.session_state.responses_left = len(st.session_state.responses_todo)
 
@@ -205,8 +213,8 @@ def questions_page3():
     st.components.v1.html(js, height=0)
 
     # Uncomment to check if sentences are displaying in the correct order.
-    # st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
-    st.markdown([d["answer_id"] for d in st.session_state.responses_todo])
+    st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
+    # st.markdown([d["answer_id"] for d in st.session_state.responses_todo])
 
     annotation_d = st.session_state.responses_todo[0]
     annotation_type = "fine"
