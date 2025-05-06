@@ -416,7 +416,7 @@ if len(st.session_state.responses_done) > 0:
         len(st.session_state.responses_done) / st.session_state.responses_total * 100
     )
     st.progress(current_progress)
-    st.write(f"{len(st.session_state.responses_done)} annotations done of {st.session_state.response_total}, {len(st.session_state.responses_todo)} more to go")
+    st.write(f"{len(st.session_state.responses_done)} annotations done of {st.session_state.responses_total}, {len(st.session_state.responses_todo)} more to go")
 else:
     st.progress(0)
     st.write(f"About to start annotations...")
