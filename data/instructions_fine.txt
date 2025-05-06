@@ -299,8 +299,7 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          <td><b>Does a gluten-free diet reduce inflammation?</b></td>
          <td>
          <mark>Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS).</mark> In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation. In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood. <br><br>
-         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten. Some people also choose plant-based diets for reasons unrelated to gluten, such as ethical concerns or environmental sustainability.
-         </td>
+         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten. Some people choose plant-based diets because of ethical concerns or environmental sustainability.
          <td style="vertical-align: top;">
            <strong>Agree</strong><br><br>
            + Provides information based on scientific evidence<br>
@@ -321,7 +320,7 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          <td></td>
          <td>
          Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS). <mark>In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation.</mark> In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood. <br><br>
-         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten. Some people also choose plant-based diets for reasons unrelated to gluten, such as ethical concerns or environmental sustainability.
+         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten. Some people choose plant-based diets because of ethical concerns or environmental sustainability.
          </td>
          <td style="vertical-align: top;">
            <strong>Agree</strong><br><br>
@@ -344,7 +343,7 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          <td></td>
          <td>
          Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS). In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation. <mark>In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood.</mark> <br><br>
-         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten. Some people also choose plant-based diets for reasons unrelated to gluten, such as ethical concerns or environmental sustainability.
+         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten. Some people choose plant-based diets because of ethical concerns or environmental sustainability.
          </td>
          <td style="vertical-align: top;">
            <strong>Agree</strong><br><br>
@@ -366,7 +365,7 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          <td></td>
          <td>
          Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS). In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation. In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood.<br><br>
-         <mark>For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten.</mark> Some people also choose plant-based diets for reasons unrelated to gluten, such as ethical concerns or environmental sustainability.
+         <mark>For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten.</mark> Some people choose plant-based diets because of ethical concerns or environmental sustainability.
          </td>
          <td style="vertical-align: top;">
            <strong>Agree</strong><br><br>
@@ -388,22 +387,22 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          <td></td>
          <td>
          Avoiding gluten may reduce inflammation in individuals with specific conditions, such as celiac disease or non-celiac gluten sensitivity (NCGS). In celiac disease, gluten triggers an autoimmune reaction that causes damage to the small intestine and inflammation. In people with NCGS, gluten may contribute to symptoms like bloating, fatigue, and joint pain, although the exact mechanisms are not fully understood.<br><br>
-         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten. <mark>Some people also choose plant-based diets for reasons unrelated to gluten, such as ethical concerns or environmental sustainability.</mark>
+         For people without gluten-related disorders, eliminating gluten might deprive the body of needed nutrients as gluten-rich foods commonly have less sugar and fat, and less folic acid, iron, and fiber than foods without gluten. <mark>Some people choose plant-based diets because of ethical concerns or environmental sustainability.</mark>
          </td>
          <td style="vertical-align: top;">
            <strong>Agree</strong><br><br>
            + Provides information based on scientific evidence<br>
-           + Expresses certainty in line with the current state of medical knowledge<br>
            + Does not contain contradictions or flaws
          </td>
          <td style="vertical-align: top;">
-           <strong>Neutral</strong><br><br>
-           + Provides context
-           - Does not directly address the question about whether the diet would reduce inflammation
+           <strong>Disagree</strong><br><br>
+           - Does not directly address the question about whether the diet would reduce inflammation <br>
+           - Does not provide details or context <br>
+           - Contains irrelevant information
          </td>
          <td style="vertical-align: top;">
-           <strong>Agree</strong><br><br>
-           + Explains risks of going gluten-free in clear, accessible language
+           <strong>Disagree</strong><br><br>
+           - Does not contain any information on the risks of a gluten-free diet or plant-based diet
          </td>
       </tr>
    </tbody>
