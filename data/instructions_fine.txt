@@ -204,20 +204,21 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          <mark>Before taking medications to relieve your headache, consider personal health conditions.</mark> If you have stomach sensitivity, ibuprofen or aspirin might irritate your stomach lining, already potentially inflamed from alcohol. In this case, Tylenol in moderation is a better option. However, it should be used cautiously, as combining it with alcohol may lead to liver damage or failure.
          </td>
          <td style="vertical-align: top;">
-           <strong>Partially Agree</strong><br><br>
+           <strong>Agree</strong><br><br>
            + Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence<br>
            + Expresses certainty in line with the current state of medical knowledge<br>
-           - It does not express uncertainty regarding probiotics’ effectiveness.
+           + Does not contain contradictions or flaws
          </td>
          <td style="vertical-align: top;">
-           <strong>Neutral</strong><br><br>
-           + Provides requested context regarding when to take probiotic<br>
+           <strong>Partially Disagree</strong><br><br>
+           + Provide context around taking medication for a headache<br>
            - Does not directly address the question
          </td>
          <td style="vertical-align: top;">
-           <strong>Agree</strong><br><br>
-           + Explains risk of taking antibiotic<br>
-           + Details consequences of taking the antibiotic and probiotic together
+           <strong>Partially Disagree</strong><br><br>
+           + Warns to consider personal health conditions<br>
+           - Does not explain risks in clear, accessible language<br>
+           - Does not detail any potential consequences
          </td>
       </tr>
       <tr>
@@ -232,15 +233,15 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
            + Does not contain contradictions or flaws
          </td>
          <td style="vertical-align: top;">
-           <strong>Neutral</strong><br><br>
+           <strong>Partially Agree</strong><br><br>
            + Provide context around taking medication for a headache<br>
-           - Does not directly address the question
+           + Mentions requested names of medications to relieve a headache<br>
+           - Does not directly address the question on what to take
          </td>
          <td style="vertical-align: top;">
-           <strong>Partially Disagree</strong><br><br>
-           + Warns to consider personal health conditions<br>
-           - Does not explain risks in clear, accessible language<br>
-           - Does not detail any potential consequences
+           <strong>Agree</strong><br><br>
+           + Explains risks in clear, accessible language<br>
+           + Details potential consequences
          </td>
       </tr>
       <tr>
