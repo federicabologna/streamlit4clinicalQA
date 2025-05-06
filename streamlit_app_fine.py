@@ -83,7 +83,7 @@ def dispatch_batch():
     mongodb_credentials = st.secrets.mongodb_credentials
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)  # Create a new client and connect to the server
-    db = client["fine2"]  # TEST DATABASE DO NOT CHANGE
+    db = client["pilot1_fine"]  # TEST DATABASE DO NOT CHANGE
     annotator_n = st.session_state.annotator_n
     batch_n = st.session_state.batch_n
 
@@ -213,7 +213,7 @@ def questions_page3():
     st.components.v1.html(js, height=0)
 
     # Uncomment to check if sentences are displaying in the correct order.
-    st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
+    # st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
     # st.markdown([d["answer_id"] for d in st.session_state.responses_todo])
 
     annotation_d = st.session_state.responses_todo[0]
@@ -231,7 +231,7 @@ def questions_page3():
 
         st.header("Answer")
 
-        st.markdown(annotation_d["answer"], allow)
+        st.markdown(annotation_d["answer"], unsafe_allow_html=Tru)
 
     with col2:
         st.subheader("The information provided in the answer:")
