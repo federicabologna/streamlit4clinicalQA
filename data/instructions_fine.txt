@@ -1,13 +1,13 @@
 ## Instructions
 
-Thank you for your participation. You will be presented with a batch of 9 question-answer pairs.
+Thank you for your participation. You will be presented with a batch of 9 question-answer pairs. You will be asked to annotate multiple sentences from each answer.
 
 Each pair will contain:
 - A medical question
 - An answer to that question
 - An highlighted sentence from the answer
 
-**You should read the entire answer, but you are rating only the highlighted sentence.**
+**You are rating ONLY the information provided in the <mark>highlighted sentence</mark>. You may use the rest of the answer for additional context as necessary.**
 
 You will evaluate the quality of the highlighted sentence along the following 3 dimensions:
 
@@ -22,17 +22,17 @@ The sentence_
 
 2. **:blue[Addresses the specific medical question.]**
 
-   To evaluate consider whether the answer:
-   - Directly addresses all the concerns included in the question
-   - Provides requested details and context
-   - Contains only information related to the question
+   - If the sentence directly addresses all the concerns included in the question -> assign **Agree**
+   - If the sentence addresses some but not all concerns included in the question -> assign **Partially Agree**
+   - If the sentence provides necessary context or details to interpret the answer -> assign **Neutral**
+   - If the sentence  provides irrelevant details or context -> assign **Partially Disagree** or **Disagree** depending on how irrelevant is the content
 
 3. **:violet[Communicates contraindications or risks.]**
 
    To evaluate consider whether the answer:
    - Explains risks in clear, accessible language
    - Details potential consequences
-   - **Note: assign Disagree if there is no mention contraindications or risks in the highlight**
+   If there is NO mention of contraindications or risks in the highlighted sentence -> assign **Disagree**
 
 You will express agreement with these 3 statements using five-point Likert-scales with the following levels: Agree, Partially Agree, Neutral, Partially Disagree, Disagree.
 
@@ -43,9 +43,6 @@ Follow these steps to make your decision:
 Please read the sentence carefully and rate it thoughtfully. Use your best judgment! If you don’t feel confident regarding your ability to rate the sentences, feel free to use trusted reference materials such as clinical practice guidelines and systematic reviews.
 
 Here are some example sentences for each criteria and Likert scale item, alongside full sentence annotations, and explanation for each annotation.
-
-**Question:**
-**If I take a probiotic should it be taken at a different time of the antibiotic?**
 
 <style>
   table {
@@ -106,10 +103,10 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
            <strong>Agree</strong><br><br>
            + Provides information based on scientific evidence<br>
            + Expresses certainty in line with the current state of medical knowledge<br>
-           + Does not contain contradictions or flaws
+           - Does not contain contradictions or flaws
          </td>
          <td style="vertical-align: top;">
-           <strong>Partially Agree</strong><br><br>
+           <strong>Neutral</strong><br><br>
            + Provides requested context around when to take probiotic<br>
            - Does not directly address the question
          </td>
@@ -179,12 +176,12 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
          </td>
          <td style="vertical-align: top;">
            <strong>Partially Agree</strong><br><br>
-           - Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence<br>
-           - Expresses certainty in line with the current state of medical knowledge<br>
-           - It does not express uncertainty regarding probiotics’ effectiveness.
+           + Provides information regarding the effect of antibiotics on probiotics is based on scientific evidence<br>
+           + Expresses certainty in line with the current state of medical knowledge<br>
+           - Does not express uncertainty regarding probiotics’ effectiveness.
          </td>
          <td style="vertical-align: top;">
-           <strong>Partially Agree</strong><br><br>
+           <strong>Neutral</strong><br><br>
            + Provides requested context regarding when to take probiotic<br>
            - Does not directly address the question
          </td>
@@ -213,7 +210,7 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
            - It does not express uncertainty regarding probiotics’ effectiveness.
          </td>
          <td style="vertical-align: top;">
-           <strong>Partially Agree</strong><br><br>
+           <strong>Neutral</strong><br><br>
            + Provides requested context regarding when to take probiotic<br>
            - Does not directly address the question
          </td>
@@ -235,7 +232,7 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
            + Does not contain contradictions or flaws
          </td>
          <td style="vertical-align: top;">
-           <strong>Partially Disagree</strong><br><br>
+           <strong>Neutral</strong><br><br>
            + Provide context around taking medication for a headache<br>
            - Does not directly address the question
          </td>
@@ -280,7 +277,7 @@ Here are some example sentences for each criteria and Likert scale item, alongsi
            + Does not contain contradictions or flaws
          </td>
          <td style="vertical-align: top;">
-           <strong>Partially Agree</strong><br><br>
+           <strong>Neutral</strong><br><br>
            + Provides context<br>
            - Does not directly address the question on what to take
          </td>
