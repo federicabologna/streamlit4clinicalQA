@@ -19,14 +19,14 @@ The sentence_
    - Provides information based on existing scientific evidence
    - Expresses certainty in line with the current state of medical knowledge
    - Does not contain contradictions or logical flaws
-
+<br>
 2. **:blue[Addresses the specific medical question.]**
 
    - If the sentence directly addresses all the concerns included in the question -> assign **Agree**
    - If the sentence addresses some but not all concerns included in the question -> assign **Partially Agree**
    - If the sentence provides necessary context or details to interpret the answer -> assign **Neutral**
    - If the sentence  provides irrelevant details or context -> assign **Partially Disagree** or **Disagree** depending on how irrelevant is the content
-
+<br>
 3. **:violet[Communicates contraindications or risks.]**
 
    To evaluate consider whether the answer:
