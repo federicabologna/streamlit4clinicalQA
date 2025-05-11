@@ -358,11 +358,11 @@ def followup_page4():
         label_visibility="hidden",
     )
 
-    # mongodb_credentials = st.secrets.mongodb_credentials
-    # uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
-    uri = f"mongodb+srv://{open(os.path.join('..', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
+    mongodb_credentials = st.secrets.mongodb_credentials
+    uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
+    # uri = f"mongodb+srv://{open(os.path.join('..', 'mongodb_clinicalqa_uri.txt')).read().strip()}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)  # Create a new client and connect to the server
-    db = client["feedback"]  # database
+    db = client["feedback-fine"]  # database
 
     leftleft, left, middle, right, rightright = st.columns(5)
     if left.button(":arrow_backward: Back", use_container_width=True):
