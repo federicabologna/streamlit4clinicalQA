@@ -213,7 +213,7 @@ def questions_page3():
     st.components.v1.html(js, height=0)
 
     # Uncomment to check if sentences are displaying in the correct order.
-    st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
+    # st.markdown([d["sentence_id"] for d in st.session_state.responses_todo])
     # st.markdown([d["answer_id"] for d in st.session_state.responses_todo])
 
     annotation_d = st.session_state.responses_todo[0]
