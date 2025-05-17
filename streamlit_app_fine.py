@@ -83,7 +83,7 @@ def dispatch_batch():
     mongodb_credentials = st.secrets.mongodb_credentials
     uri = f"mongodb+srv://{mongodb_credentials}/?retryWrites=true&w=majority&appName=clinicalqa"
     client = MongoClient(uri)  # Create a new client and connect to the server
-    db = client["pilot1_fine"]  # TEST DATABASE DO NOT CHANGE
+    db = client["fine2"]  # TEST DATABASE DO NOT CHANGE
     annotator_n = st.session_state.annotator_n
     batch_n = st.session_state.batch_n
 
