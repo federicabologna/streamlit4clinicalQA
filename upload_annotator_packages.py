@@ -17,6 +17,14 @@ except Exception as e:
 
 output_dir = os.path.join(os.getcwd(), 'output')
 
+def remove_duplicates(database_name):
+    db = client[database_name]  # Replace with your database name
+    annotators = [f'annotator{n}' for n in range(1,7)]
+    for annotator in annotators:
+        key = f'{annotator}'
+        deletion = db[key].delete_many({"rated": "No"})
+        print(f"Deleted {deletion.deleted_count} documents.")
+
 
 def upload_pilot(pilot_name):
     db = client[pilot_name]  # Replace with your database name
@@ -32,7 +40,7 @@ def upload_pilot(pilot_name):
 
 def upload_annotations(typ):
 
-    db = client[typ]  # Replace with your database name
+    db = client['fine2']  # Replace with your database name
 
     annotator_l = [i for i in range(1,7)]
     for n in annotator_l:
@@ -50,4 +58,5 @@ def upload_annotations(typ):
 
 if __name__ == "__main__":
     # upload_pilot('pilot1_fine')
-    upload_annotations('fine2')
+    upload_annotations('fine1')
+    # remove_duplicates('pilot1_fine')
