@@ -20,7 +20,7 @@ if "annotator_n" not in st.session_state:
 if "batch_n" not in st.session_state:
     st.session_state.batch_n = None
 if "valid_batch_ns" not in st.session_state:
-    st.session_state.valid_batch_ns = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    st.session_state.valid_batch_ns = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]
 if "annotation_id" not in st.session_state:
     st.session_state.annotation_id = None
 if "responses_todo" not in st.session_state:
